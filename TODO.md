@@ -7,6 +7,8 @@
 
 ## Backlog
 
+- only run some things on release?
+
 - Bugsnag
 - Android Jetpack
 - Dagger
@@ -14,11 +16,9 @@
 - RxKotlin
 - LiveData/data binding
 - Testing + mocking
-- Gradle hooks
-- Git hooks
+- Gradle/Git hooks
 - Auto update badges
-- Dex count
-- APK size count
+- Dex/APK size count
 - Dependency update plugin
 - Separate gradle files into logical sections (dependencies, etc)
 
