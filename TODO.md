@@ -1,6 +1,6 @@
 ## In progress
 
-- Obfuscation/minification with R8
+- Obfuscation/minification
 - Signing
 - CI (test on release APK)
 
