@@ -7,6 +7,7 @@
 
 ## Backlog
 
+- Bugsnag
 - Dagger
 - Timber
 - RxKotlin
@@ -18,4 +19,4 @@
 - Auto update badges
 - Dex count
 - APK size count
--
+- Dependency update plugin
