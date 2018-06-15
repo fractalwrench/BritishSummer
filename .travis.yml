@@ -12,8 +12,6 @@ android:
     - sys-img-armeabi-v7a-android-28
 
 env:
-  matrix:
-    - ANDROID_TARGET=android-28 ANDROID_ABI=armeabi-v7a
   global:
     - ADB_INSTALL_TIMEOUT=5 # increase from default of 2 mins
 
@@ -21,7 +19,7 @@ before_script:
   # Create and start emulator
   - android list target
   - jdk_switcher use oraclejdk8
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - echo no | android create avd --force --name test --package 'system-images;android-28;google_apis_playstore;x86'
   - emulator -avd test -no-skin -no-audio -no-window &
   - adb wait-for-device
   - while [[ `adb shell pm path android` == 'Error'* ]]; do sleep 2; done

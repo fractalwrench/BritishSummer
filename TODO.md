@@ -15,8 +15,15 @@
 - Testing + mocking
 - Gradle hooks
 - Git hooks
-- Checkstyle/android lint/kotlin linter
 - Auto update badges
 - Dex count
 - APK size count
 - Dependency update plugin
+
+
+
+
+
+# Completed!
+
+Static analysis: Android Lint, KtLint
