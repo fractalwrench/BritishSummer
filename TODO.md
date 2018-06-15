@@ -1,0 +1,9 @@
+- R8
+- CI
+- Dagger
+- Timber
+- RxKotlin
+- LiveData/data binding
+- Testing + mocking
+- Gradle hooks
+- Checkstyle/android lint/kotlin linter
