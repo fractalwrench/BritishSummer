@@ -8,6 +8,7 @@
 ## Backlog
 
 - Bugsnag
+- Android Jetpack
 - Dagger
 - Timber
 - RxKotlin
@@ -19,9 +20,7 @@
 - Dex count
 - APK size count
 - Dependency update plugin
-
-
-
+- Separate gradle files into logical sections (dependencies, etc)
 
 
 # Completed!
