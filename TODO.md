@@ -4,9 +4,6 @@
 
 ## Backlog
 
-- only run some things on release?
-
-- Bugsnag
 - Signing
 - Android Jetpack
 - Dagger
@@ -14,10 +11,8 @@
 - RxKotlin
 - LiveData/data binding
 - Testing + mocking
-- Gradle/Git hooks
 - Auto update badges
-- Dex/APK size count
-- Dependency update plugin
+- Dex/APK size count (blocked, broken on Android 8.0)
 
 - Regular app
 - Instant App
@@ -34,5 +29,7 @@ Obfuscation/minification: ProGuard
 CI: Travis
 Separate gradle files into logical sections (dependencies, etc)
 Dependency update check plugin: ./gradlew dependencyUpdates
+Bugsnag: measure application stability, errors vs crash rate
 
 
+API keys: store in ~/.gradle/gradle.properties, add as environment variable on Travis

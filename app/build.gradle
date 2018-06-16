@@ -5,6 +5,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "com.github.ben-manes.versions"
 
+def bugsnagKey = project.hasProperty("britSummerBugsnagKey") ? project.property("britSummerBugsnagKey") : ""
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -14,6 +16,10 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders = [
+                bugsnagApiKey: bugsnagKey
+        ]
     }
     buildTypes {
         release {
