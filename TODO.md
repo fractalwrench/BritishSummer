@@ -6,7 +6,6 @@
 
 - Signing
 - Android Jetpack
-- Dagger
 - Timber
 - RxKotlin
 - LiveData/data binding
@@ -30,6 +29,8 @@ CI: Travis
 Separate gradle files into logical sections (dependencies, etc)
 Dependency update check plugin: ./gradlew dependencyUpdates
 Bugsnag: measure application stability, errors vs crash rate
+Dagger: dependency injection (keep your sanity)
+
 
 
 API keys: store in ~/.gradle/gradle.properties, add as environment variable on Travis
