@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BritishSummer</string>
+    <string name="city_field_hint">Enter your city</string>
+    <string name="weather_api_url">https://samples.openweathermap.org/data/2.5/</string>
 </resources>

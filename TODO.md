@@ -1,5 +1,11 @@
 ## In progress
 
+- JSON serialisation of current weather
+- Use Observable + RxJava for delivery
+- Use own API key + endpoint
+- Wrap response with Response/NetworkBoundResponse class
+- Begin binding data
+
 
 ## Backlog
 
@@ -9,7 +15,6 @@
 - LiveData/data binding
 - Testing + mocking
 - Dex/APK size count (blocked, broken on Android 8.0)
-
 
 
 ## Targets

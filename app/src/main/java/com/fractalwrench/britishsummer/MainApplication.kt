@@ -20,6 +20,7 @@ class MainApplication : Application() {
 
         appComponent = DaggerAppComponent.builder()
                 .androidModule(AndroidModule(this))
+                .networkModule(NetworkModule(getString(R.string.weather_api_url)))
                 .build()
     }
 }

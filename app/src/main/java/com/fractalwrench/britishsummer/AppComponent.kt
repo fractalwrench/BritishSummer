@@ -1,10 +1,11 @@
 package com.fractalwrench.britishsummer
 
+import com.fractalwrench.britishsummer.ui.main.MainFragment
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [(AndroidModule::class)])
+@Component(modules = [(AndroidModule::class), (NetworkModule::class)])
 @Singleton
 interface AppComponent {
-    fun inject(activity: MainActivity)
+    fun inject(fragment: MainFragment)
 }
