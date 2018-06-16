@@ -29,9 +29,10 @@
 
 # Completed!
 
-Static analysis: Android Lint, KtLint
+Static analysis: Android Lint, KtLint (./gradlew lint check)
 Obfuscation/minification: ProGuard
 CI: Travis
 Separate gradle files into logical sections (dependencies, etc)
+Dependency update check plugin: ./gradlew dependencyUpdates
 
 
