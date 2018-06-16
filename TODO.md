@@ -1,17 +1,18 @@
 ## In progress
 
 
-
 ## Backlog
 
 - Signing
 - Android Jetpack
-- Timber
 - RxKotlin
 - LiveData/data binding
 - Testing + mocking
-- Auto update badges
 - Dex/APK size count (blocked, broken on Android 8.0)
+
+
+
+## Targets
 
 - Regular app
 - Instant App
@@ -30,6 +31,7 @@ Separate gradle files into logical sections (dependencies, etc)
 Dependency update check plugin: ./gradlew dependencyUpdates
 Bugsnag: measure application stability, errors vs crash rate
 Dagger: dependency injection (keep your sanity)
+Logging: Timber, only log in default builds with advanced Tree Of Souls technology
 
 
 
