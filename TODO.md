@@ -1,8 +1,5 @@
 ## In progress
 
-- Obfuscation/minification
-- Signing
-- CI (test on release APK)
 
 
 ## Backlog
@@ -10,6 +7,7 @@
 - only run some things on release?
 
 - Bugsnag
+- Signing
 - Android Jetpack
 - Dagger
 - Timber
@@ -20,9 +18,20 @@
 - Auto update badges
 - Dex/APK size count
 - Dependency update plugin
-- Separate gradle files into logical sections (dependencies, etc)
+
+- Regular app
+- Instant App
+- Wear App
+- Auto App
+- TV App
+- App slice
 
 
 # Completed!
 
 Static analysis: Android Lint, KtLint
+Obfuscation/minification: ProGuard
+CI: Travis
+Separate gradle files into logical sections (dependencies, etc)
+
+

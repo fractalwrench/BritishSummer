@@ -21,7 +21,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-ext {
-    androidKtxVersion = "1.0.0-alpha3"
-}
