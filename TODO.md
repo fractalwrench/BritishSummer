@@ -10,9 +10,7 @@
 - Testing + mocking
 - Dex/APK size count (blocked, broken on Android 8.0)
 - Get location (with permission check, degrade to graceful behaviour)
-- Interceptor for network connectivity
-- OkHttp cache/etags (if headers are correct)
-
+- Save multiple locations (way in the future)
 
 ## Targets
 
@@ -34,8 +32,8 @@ Dependency update check plugin: ./gradlew dependencyUpdates
 Bugsnag: measure application stability, errors vs crash rate
 Dagger: dependency injection (keep your sanity)
 Logging: Timber, only log in default builds with advanced Tree Of Souls technology
-
 Interceptor: adds query param of API key to each request
-
+OkHttp cache: reduce requests with cache-control and e-tags
+RxBinding/RxJava: reactive bindings for the android framework
 
 API keys: store in ~/.gradle/gradle.properties, add as environment variable on Travis

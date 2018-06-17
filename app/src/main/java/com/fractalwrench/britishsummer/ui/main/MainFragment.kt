@@ -8,10 +8,10 @@ import androidx.lifecycle.ViewModelProviders
 import com.fractalwrench.britishsummer.MainApplication
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.WeatherApi
+import com.jakewharton.rxbinding2.view.RxView.clicks
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main_fragment.location_button
 import kotlinx.android.synthetic.main.main_fragment.city_field
-import kotlinx.android.synthetic.main.main_fragment.view.*
 import kotlinx.android.synthetic.main.main_fragment.weather_results
 import javax.inject.Inject
 
@@ -43,15 +43,16 @@ class MainFragment : androidx.fragment.app.Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // FIXME hacked together for testing
-        location_button.setOnClickListener {
-            val cityName = city_field.text.toString()
-            val currentWeather = weatherApi.getCurrentWeather(cityName)
 
-            currentWeather.subscribeOn(Schedulers.io())
-                    .subscribe {
-                        weather_results.text = it.name
-                    }
-        }
+        val map = clicks(location_button)
+                .map { city_field.text.toString() }
+                .concatMap { weatherApi.getCurrentWeather(it) }
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    weather_results.text = it.name
+                }
+
+        // TODO handle subscription cancellation
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
