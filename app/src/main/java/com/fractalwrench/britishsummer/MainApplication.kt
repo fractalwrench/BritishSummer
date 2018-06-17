@@ -18,9 +18,10 @@ class MainApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
 
+        val baseUrl = getString(R.string.weather_api_url)
         appComponent = DaggerAppComponent.builder()
                 .androidModule(AndroidModule(this))
-                .networkModule(NetworkModule(getString(R.string.weather_api_url)))
+                .networkModule(NetworkModule(baseUrl))
                 .build()
     }
 }

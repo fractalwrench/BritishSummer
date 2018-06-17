@@ -10,7 +10,6 @@ class CurrentWeatherTest {
 
     private lateinit var moshi: Moshi
     private lateinit var adapter: JsonAdapter<CurrentWeather>
-    internal val resourceName = ""
 
     @Before
     fun setUp() {

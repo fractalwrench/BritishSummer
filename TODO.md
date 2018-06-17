@@ -1,6 +1,5 @@
 ## In progress
 
-- JSON serialisation of current weather
 - Use Observable + RxJava for delivery
 - Use own API key + endpoint
 - Wrap response with Response/NetworkBoundResponse class

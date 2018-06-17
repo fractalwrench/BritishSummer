@@ -9,7 +9,9 @@ import com.fractalwrench.britishsummer.CurrentWeather
 import com.fractalwrench.britishsummer.MainApplication
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.WeatherApi
-import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.main_fragment.location_button
+import kotlinx.android.synthetic.main.main_fragment.city_field
+import kotlinx.android.synthetic.main.main_fragment.weather_results
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +47,7 @@ class MainFragment : androidx.fragment.app.Fragment() {
         // FIXME hacked together for testing
         location_button.setOnClickListener {
             val cityName = city_field.text.toString()
-            val currentWeather = weatherApi.getCurrentWeather(cityName, "b6907d289e10d714a6e88b30761fae22")
+            val currentWeather = weatherApi.getCurrentWeather(cityName, getString(R.string.weather_api_key))
             val response = currentWeather.enqueue(object : Callback<CurrentWeather> {
                 override fun onFailure(call: Call<CurrentWeather>?, t: Throwable?) {
                     TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
