@@ -19,9 +19,11 @@ class MainApplication : Application() {
         }
 
         val baseUrl = getString(R.string.weather_api_url)
+        val apiKey = getString(R.string.weather_api_key)
+
         appComponent = DaggerAppComponent.builder()
                 .androidModule(AndroidModule(this))
-                .networkModule(NetworkModule(baseUrl))
+                .networkModule(NetworkModule(baseUrl, apiKey))
                 .build()
     }
 }

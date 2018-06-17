@@ -1,7 +1,5 @@
 ## In progress
 
-- Use Observable + RxJava for delivery
-- Use own API key + endpoint
 - Wrap response with Response/NetworkBoundResponse class
 - Begin binding data
 
@@ -9,12 +7,12 @@
 ## Backlog
 
 - Signing
-- Android Jetpack
-- RxKotlin
-- LiveData/data binding
+- LiveData/data binding according to architecture
 - Testing + mocking
 - Dex/APK size count (blocked, broken on Android 8.0)
 - Get location (with permission check, degrade to graceful behaviour)
+- Organise gradle dependencies
+- Add interceptor for weather API key
 
 
 ## Targets
