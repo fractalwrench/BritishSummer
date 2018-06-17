@@ -1,9 +1,11 @@
 package com.fractalwrench.britishsummer
 
+import android.content.Context
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import dagger.Module
 import dagger.Provides
+import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Converter
@@ -43,8 +45,15 @@ class NetworkModule(private val baseUrl: String, private val weatherApiKey: Stri
 
     @Provides
     @Singleton
-    fun okHttpClient(interceptor: Interceptor): OkHttpClient {
+    fun cache(context: Context): Cache {
+        return Cache(context.cacheDir, 16 * 1024 * 1024)
+    }
+
+    @Provides
+    @Singleton
+    fun okHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient {
         return OkHttpClient.Builder()
+                .cache(cache)
                 .addInterceptor(interceptor)
                 .build()
     }
