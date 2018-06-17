@@ -15,6 +15,7 @@
 - LiveData/data binding
 - Testing + mocking
 - Dex/APK size count (blocked, broken on Android 8.0)
+- Get location (with permission check, degrade to graceful behaviour)
 
 
 ## Targets

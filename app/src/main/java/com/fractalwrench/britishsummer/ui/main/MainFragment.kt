@@ -52,7 +52,7 @@ class MainFragment : androidx.fragment.app.Fragment() {
                 }
 
                 override fun onResponse(call: Call<CurrentWeather>?, response: Response<CurrentWeather>?) {
-                    TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
+                    weather_results.text = response!!.body()!!.name
                 }
             })
         }
