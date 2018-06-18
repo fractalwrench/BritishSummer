@@ -5,16 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.fractalwrench.britishsummer.CurrentWeatherRepository
 import com.fractalwrench.britishsummer.MainApplication
 import com.fractalwrench.britishsummer.R
-import com.fractalwrench.britishsummer.R.id.weather_results
-import com.fractalwrench.britishsummer.WeatherApi
-import com.jakewharton.rxbinding2.view.RxView.clicks
-import io.reactivex.BackpressureStrategy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main_fragment.location_button
 import kotlinx.android.synthetic.main.main_fragment.city_field
 import kotlinx.android.synthetic.main.main_fragment.weather_results
@@ -61,5 +55,4 @@ class MainFragment : androidx.fragment.app.Fragment() {
             weather_results.text = it?.name
         })
     }
-
 }
