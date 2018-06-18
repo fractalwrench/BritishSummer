@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.fractalwrench.britishsummer.CurrentWeatherRepository
 import com.fractalwrench.britishsummer.MainApplication
@@ -46,13 +47,10 @@ class MainFragment : androidx.fragment.app.Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val subscribe = clicks(location_button)
-                .map { city_field.text.toString() }
-                .concatMap(repository::getCurrentWeather)
-                .subscribe {
-                    viewModel.weather.value = it
-                }
-        // TODO handle subscription cancellation
+        location_button.setOnClickListener {
+            val cityName = city_field.text.toString()
+            viewModel.showCity(repository, cityName) // FIXME move repository into viewmodel
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
