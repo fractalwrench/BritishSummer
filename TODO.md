@@ -14,6 +14,7 @@
 - Save multiple locations (way in the future)
 - Log module (bugsnag breadcrumbs, notify, timber)
 - Swap out schedulers (if needed)
+- Setup nullability extensions for livedata: https://proandroiddev.com/nonnull-livedata-with-kotlin-extension-26963ffd0333
 
 ## Targets
 

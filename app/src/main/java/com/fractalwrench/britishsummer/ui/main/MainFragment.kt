@@ -9,8 +9,10 @@ import androidx.lifecycle.ViewModelProviders
 import com.fractalwrench.britishsummer.CurrentWeatherRepository
 import com.fractalwrench.britishsummer.MainApplication
 import com.fractalwrench.britishsummer.R
+import com.fractalwrench.britishsummer.R.id.weather_results
 import com.fractalwrench.britishsummer.WeatherApi
 import com.jakewharton.rxbinding2.view.RxView.clicks
+import io.reactivex.BackpressureStrategy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.main_fragment.location_button
 import kotlinx.android.synthetic.main.main_fragment.city_field
@@ -44,16 +46,12 @@ class MainFragment : androidx.fragment.app.Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // FIXME hacked together for testing
-
-        val map = clicks(location_button)
+        val subscribe = clicks(location_button)
                 .map { city_field.text.toString() }
                 .concatMap(repository::getCurrentWeather)
                 .subscribe {
-                    weather_results.text = it.name
-//                    viewModel.cityName.value = it.name
+                    viewModel.weather.value = it
                 }
-
         // TODO handle subscription cancellation
     }
 
@@ -61,9 +59,9 @@ class MainFragment : androidx.fragment.app.Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
 
-//        viewModel.cityName.observe(this, Observer({
-//        }))
-
-        // TODO: Use the ViewModel
+        viewModel.weather.observe(this, Observer {
+            weather_results.text = it?.name
+        })
     }
+
 }
