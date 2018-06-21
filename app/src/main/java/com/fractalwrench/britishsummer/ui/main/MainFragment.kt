@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.fractalwrench.britishsummer.CurrentWeatherRepository
-import com.fractalwrench.britishsummer.MainApplication
-import com.fractalwrench.britishsummer.R
-import kotlinx.android.synthetic.main.main_fragment.location_button
-import kotlinx.android.synthetic.main.main_fragment.city_field
-import kotlinx.android.synthetic.main.main_fragment.weather_results
+import com.fractalwrench.britishsummer.*
+import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.main_fragment.*
+import java.util.*
 import javax.inject.Inject
 
-class MainFragment : androidx.fragment.app.Fragment() {
+class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -41,10 +42,17 @@ class MainFragment : androidx.fragment.app.Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        location_button.setOnClickListener {
-            val cityName = city_field.text.toString()
-            viewModel.showCity(repository, cityName) // FIXME move repository into viewmodel
-        }
+//        // TODO add to disposable
+
+        RxTextView.editorActions(city_field, {
+            val isDone = it == EditorInfo.IME_ACTION_DONE
+            if (isDone) {
+                val cityName = city_field.text.toString()
+                viewModel.showCity(repository, cityName) // FIXME move repository into viewmodel
+                context?.hideKeyboard(city_field)
+            }
+            isDone
+        }).subscribe()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -52,7 +60,16 @@ class MainFragment : androidx.fragment.app.Fragment() {
         viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
 
         viewModel.weather.observe(this, Observer {
-            weather_results.text = it?.name
+            // TODO return a sealed class of Data, Progress, Error?
+
+            it!! // FIXME
+
+            location_title.text = it.name
+            weather_desc.text = it.weather[0].description // fixme check length, resource placeholders
+            temp_desc.text = "Current: ${it.main.temp}, Min: ${it.main.temp_min}, Max: ${it.main.temp_max}"
+            solar_desc.text = "Sunrise: ${Date(it.sys.sunrise)}, Sunset: ${Date(it.sys.sunset)}"
+            wind_desc.text = "Wind speed: ${it.wind.speed}, Direction: ${it.wind.deg}"
+            humidity_desc.text = "Humidity: ${it.main.humidity}%"
         })
     }
 }

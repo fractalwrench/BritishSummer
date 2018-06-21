@@ -7,6 +7,7 @@
 ## Backlog
 
 - LiveData/data binding according to architecture
+- Encapsulate debounce operator
 - Espresso tests
 - Unit Tests + mocking
 - Dex/APK size count (blocked, broken on Android 8.0)
@@ -15,6 +16,8 @@
 - Log module (bugsnag breadcrumbs, notify, timber)
 - Swap out schedulers (if needed)
 - Setup nullability extensions for livedata: https://proandroiddev.com/nonnull-livedata-with-kotlin-extension-26963ffd0333
+- Inject schedulers
+
 
 ## Targets
 
