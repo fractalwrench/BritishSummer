@@ -8,11 +8,19 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.fractalwrench.britishsummer.*
+import com.fractalwrench.britishsummer.CurrentWeatherRepository
+import com.fractalwrench.britishsummer.MainApplication
+import com.fractalwrench.britishsummer.R
+import com.fractalwrench.britishsummer.hideKeyboard
 import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.main_fragment.*
-import java.util.*
+import kotlinx.android.synthetic.main.main_fragment.city_field
+import kotlinx.android.synthetic.main.main_fragment.humidity_desc
+import kotlinx.android.synthetic.main.main_fragment.location_title
+import kotlinx.android.synthetic.main.main_fragment.solar_desc
+import kotlinx.android.synthetic.main.main_fragment.temp_desc
+import kotlinx.android.synthetic.main.main_fragment.weather_desc
+import kotlinx.android.synthetic.main.main_fragment.wind_desc
+import java.util.Date
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
