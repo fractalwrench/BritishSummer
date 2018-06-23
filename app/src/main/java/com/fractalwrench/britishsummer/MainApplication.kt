@@ -1,14 +1,14 @@
 package com.fractalwrench.britishsummer
 
 import android.app.Application
+import androidModule
 import com.bugsnag.android.Bugsnag
+import dataModule
+import org.koin.android.ext.android.startKoin
+import org.koin.dsl.module.applicationContext
 import timber.log.Timber
 
 class MainApplication : Application() {
-
-    companion object {
-        lateinit var appComponent: AppComponent
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -20,10 +20,7 @@ class MainApplication : Application() {
 
         val baseUrl = getString(R.string.weather_api_url)
         val apiKey = getString(R.string.weather_api_key)
-
-        appComponent = DaggerAppComponent.builder()
-                .androidModule(AndroidModule(this))
-                .networkModule(NetworkModule(baseUrl, apiKey))
-                .build()
+        val networkModule = generateNetworkModule(baseUrl, apiKey)
+        startKoin(this, listOf(androidModule, dataModule, networkModule))
     }
 }

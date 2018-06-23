@@ -5,7 +5,7 @@ ext {
     lifecycleVersion = "2.0.0-alpha1"
     constraintLayoutVersion = "1.1.2"
 
-    daggerVersion = "2.13"
+    koinVersion = "0.9.3"
     retrofitVersion = "2.4.0"
     timberVersion = "4.7.0"
     bugsnagVersion = "4.5.0"
@@ -25,8 +25,8 @@ dependencies {
 
     implementation "com.bugsnag:bugsnag-android:$bugsnagVersion"
 
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    implementation "org.koin:koin-android:$koinVersion"
+    implementation "org.koin:koin-android-architecture:$koinVersion"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"

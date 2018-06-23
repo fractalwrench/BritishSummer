@@ -37,7 +37,7 @@
 - Separate gradle files into logical sections (dependencies, etc)
 - Dependency update check plugin: ./gradlew dependencyUpdates
 - Bugsnag: measure application stability, errors vs crash rate
-- Dagger: dependency injection (keep your sanity)
+- Koin: _simple_ dependency injection with a Kotlin DSL. (Easier to understand than Dagger 2)
 - Logging: Timber, only log in default builds with advanced Tree Of Souls technology
 - Interceptor: adds query param of API key to each request
 - OkHttp cache: reduce requests with cache-control and e-tags

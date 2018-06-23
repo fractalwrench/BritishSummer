@@ -1,13 +1,6 @@
-package com.fractalwrench.britishsummer
+import com.fractalwrench.britishsummer.CurrentWeatherRepository
+import org.koin.dsl.module.applicationContext
 
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
-
-@Module
-class DataModule {
-
-    @Provides
-    @Singleton
-    fun currentWeatherRepository(weatherApi: WeatherApi) = CurrentWeatherRepository(weatherApi)
+val dataModule = applicationContext {
+    bean { CurrentWeatherRepository(get()) }
 }

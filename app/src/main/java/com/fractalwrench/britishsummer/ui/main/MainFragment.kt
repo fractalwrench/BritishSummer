@@ -1,5 +1,6 @@
 package com.fractalwrench.britishsummer.ui.main
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,8 +21,8 @@ import kotlinx.android.synthetic.main.main_fragment.solar_desc
 import kotlinx.android.synthetic.main.main_fragment.temp_desc
 import kotlinx.android.synthetic.main.main_fragment.weather_desc
 import kotlinx.android.synthetic.main.main_fragment.wind_desc
+import org.koin.android.ext.android.inject
 import java.util.Date
-import javax.inject.Inject
 
 class MainFragment : Fragment() {
 
@@ -29,15 +30,11 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    @Inject
-    lateinit var repository: CurrentWeatherRepository
+    val ctx: Context by inject()
+
+    val repository: CurrentWeatherRepository by inject()
 
     private lateinit var viewModel: CurrentWeatherViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        MainApplication.appComponent.inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
