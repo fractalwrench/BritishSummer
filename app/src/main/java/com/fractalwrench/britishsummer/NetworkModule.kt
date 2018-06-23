@@ -8,7 +8,6 @@ import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
 import org.koin.dsl.module.module
 import retrofit2.Converter
 import retrofit2.Retrofit

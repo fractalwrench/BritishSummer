@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.fractalwrench.britishsummer.CurrentWeatherRepository
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.hideKeyboard
+import com.fractalwrench.britishsummer.nonNullObserve
 import com.jakewharton.rxbinding2.widget.RxTextView
 import kotlinx.android.synthetic.main.main_fragment.city_field
 import kotlinx.android.synthetic.main.main_fragment.humidity_desc
@@ -20,7 +18,6 @@ import kotlinx.android.synthetic.main.main_fragment.temp_desc
 import kotlinx.android.synthetic.main.main_fragment.weather_desc
 import kotlinx.android.synthetic.main.main_fragment.wind_desc
 import org.koin.android.architecture.ext.android.viewModel
-import org.koin.android.ext.android.inject
 import java.util.Date
 
 class MainFragment : Fragment() {
@@ -59,11 +56,8 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 //        weatherModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
 
-        weatherModel.weather.observe(this, Observer {
+        weatherModel.weather.nonNullObserve(this, {
             // TODO return a sealed class of Data, Progress, Error?
-
-            it!! // FIXME
-
             location_title.text = it.name
             weather_desc.text = it.weather[0].description // fixme check length, resource placeholders
             temp_desc.text = "Current: ${it.main.temp}, Min: ${it.main.temp_min}, Max: ${it.main.temp_max}"

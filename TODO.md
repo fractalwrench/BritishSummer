@@ -15,7 +15,6 @@
 - Save multiple locations (way in the future)
 - Log module (bugsnag breadcrumbs, notify, timber)
 - Swap out schedulers (if needed)
-- Setup nullability extensions for livedata: https://proandroiddev.com/nonnull-livedata-with-kotlin-extension-26963ffd0333
 - Inject schedulers
 
 
@@ -43,3 +42,4 @@
 - OkHttp cache: reduce requests with cache-control and e-tags
 - RxBinding/RxJava: reactive bindings for the android framework
 - API keys: store in ~/.gradle/gradle.properties, add as environment variable on Travis
+- Setup extra non-null observe extension method for livedata: https://proandroiddev.com/nonnull-livedata-with-kotlin-extension-26963ffd0333
