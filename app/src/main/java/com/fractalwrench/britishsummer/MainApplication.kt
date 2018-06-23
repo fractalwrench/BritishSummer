@@ -5,14 +5,14 @@ import androidModule
 import com.bugsnag.android.Bugsnag
 import dataModule
 import org.koin.android.ext.android.startKoin
-import org.koin.dsl.module.applicationContext
 import timber.log.Timber
 
 class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Bugsnag.init(this)
+        val client = Bugsnag.init(this)
+        client.config.notifyReleaseStages = arrayOf("production")
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
@@ -21,6 +21,6 @@ class MainApplication : Application() {
         val baseUrl = getString(R.string.weather_api_url)
         val apiKey = getString(R.string.weather_api_key)
         val networkModule = generateNetworkModule(baseUrl, apiKey)
-        startKoin(this, listOf(androidModule, dataModule, networkModule))
+        startKoin(this, listOf(androidModule, dataModule, networkModule, viewModelModule))
     }
 }

@@ -1,5 +1,5 @@
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val androidModule = applicationContext {
-    bean { this }
+val androidModule = module {
+    single { this }
 }

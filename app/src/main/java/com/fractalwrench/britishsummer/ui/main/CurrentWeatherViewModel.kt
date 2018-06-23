@@ -7,12 +7,12 @@ import com.fractalwrench.britishsummer.CurrentWeatherRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-class CurrentWeatherViewModel : ViewModel() {
+class CurrentWeatherViewModel(private val repository: CurrentWeatherRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     val weather: MutableLiveData<CurrentWeather> = MutableLiveData()
 
-    fun showCity(repository: CurrentWeatherRepository, cityName: String) {
+    fun showCity(cityName: String) {
         compositeDisposable.add(
                 repository.getCurrentWeather(cityName)
                         .observeOn(AndroidSchedulers.mainThread())

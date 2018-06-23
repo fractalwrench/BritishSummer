@@ -1,6 +1,5 @@
 package com.fractalwrench.britishsummer.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.fractalwrench.britishsummer.CurrentWeatherRepository
-import com.fractalwrench.britishsummer.MainApplication
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.jakewharton.rxbinding2.widget.RxTextView
@@ -21,6 +19,7 @@ import kotlinx.android.synthetic.main.main_fragment.solar_desc
 import kotlinx.android.synthetic.main.main_fragment.temp_desc
 import kotlinx.android.synthetic.main.main_fragment.weather_desc
 import kotlinx.android.synthetic.main.main_fragment.wind_desc
+import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
 import java.util.Date
 
@@ -30,11 +29,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    val ctx: Context by inject()
-
-    val repository: CurrentWeatherRepository by inject()
-
-    private lateinit var viewModel: CurrentWeatherViewModel
+    private val weatherModel: CurrentWeatherViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,13 +42,13 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        // TODO add to disposable
+//      TODO add to disposable
 
         RxTextView.editorActions(city_field, {
             val isDone = it == EditorInfo.IME_ACTION_DONE
             if (isDone) {
                 val cityName = city_field.text.toString()
-                viewModel.showCity(repository, cityName) // FIXME move repository into viewmodel
+                weatherModel.showCity(cityName)
                 context?.hideKeyboard(city_field)
             }
             isDone
@@ -62,9 +57,9 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
+//        weatherModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
 
-        viewModel.weather.observe(this, Observer {
+        weatherModel.weather.observe(this, Observer {
             // TODO return a sealed class of Data, Progress, Error?
 
             it!! // FIXME

@@ -9,6 +9,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -16,11 +17,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.Date
 
 fun generateNetworkModule(baseUrl: String, weatherApiKey: String): Module {
-
-    return applicationContext {
-        bean { retrofit(get(), get(), baseUrl) }
-        bean { cache(get()) }
-        bean { weatherApi(get()) }
+    return module {
+        single { retrofit(get(), get(), baseUrl) }
+        single { cache(get()) }
+        single { weatherApi(get()) }
         factory { moshi() }
         factory { converterFactory(get()) }
         factory { interceptor(weatherApiKey) }
