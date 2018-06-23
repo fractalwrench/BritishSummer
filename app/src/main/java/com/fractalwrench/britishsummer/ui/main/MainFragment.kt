@@ -8,6 +8,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.hideKeyboard
+import com.fractalwrench.britishsummer.log.Logger
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.jakewharton.rxbinding2.widget.RxTextView
 import kotlinx.android.synthetic.main.main_fragment.city_field
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.main_fragment.temp_desc
 import kotlinx.android.synthetic.main.main_fragment.weather_desc
 import kotlinx.android.synthetic.main.main_fragment.wind_desc
 import org.koin.android.architecture.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import java.util.Date
 
 class MainFragment : Fragment() {
@@ -27,6 +29,7 @@ class MainFragment : Fragment() {
     }
 
     private val weatherModel: CurrentWeatherViewModel by viewModel()
+    private val logger: Logger by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +47,7 @@ class MainFragment : Fragment() {
         RxTextView.editorActions(city_field, {
             val isDone = it == EditorInfo.IME_ACTION_DONE
             if (isDone) {
+                logger.log("Finding weather for city")
                 val cityName = city_field.text.toString()
                 weatherModel.showCity(cityName)
                 context?.hideKeyboard(city_field)
