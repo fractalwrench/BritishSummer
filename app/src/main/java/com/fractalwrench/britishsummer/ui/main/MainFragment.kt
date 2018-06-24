@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import com.fractalwrench.britishsummer.CurrentWeather
 import com.fractalwrench.britishsummer.R
+import com.fractalwrench.britishsummer.UiModel
+import com.fractalwrench.britishsummer.debounceUi
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.log.Logger
 import com.fractalwrench.britishsummer.nonNullObserve
@@ -44,30 +47,36 @@ class MainFragment : Fragment() {
 
 //      TODO add to disposable
 
-        RxTextView.editorActions(city_field, {
-            val isDone = it == EditorInfo.IME_ACTION_DONE
-            if (isDone) {
-                logger.log("Finding weather for city")
-                val cityName = city_field.text.toString()
-                weatherModel.showCity(cityName)
-                context?.hideKeyboard(city_field)
-            }
-            isDone
-        }).subscribe()
+        val disposable = RxTextView.editorActions(city_field)
+                .filter { it == EditorInfo.IME_ACTION_DONE }
+                .debounceUi()
+                .forEach {
+                    logger.log("Finding weather for city")
+                    val cityName = city_field.text.toString()
+                    weatherModel.showCity(cityName)
+                    context?.hideKeyboard(city_field)
+                }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        weatherModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel::class.java)
 
         weatherModel.weather.nonNullObserve(this, {
-            // TODO return a sealed class of Data, Progress, Error?
-            location_title.text = it.name
-            weather_desc.text = it.weather[0].description // fixme check length, resource placeholders
-            temp_desc.text = "Current: ${it.main.temp}, Min: ${it.main.temp_min}, Max: ${it.main.temp_max}"
-            solar_desc.text = "Sunrise: ${Date(it.sys.sunrise)}, Sunset: ${Date(it.sys.sunset)}"
-            wind_desc.text = "Wind speed: ${it.wind.speed}, Direction: ${it.wind.deg}"
-            humidity_desc.text = "Humidity: ${it.main.humidity}%"
+            when (it) {
+                is UiModel.Error -> TODO()
+                is UiModel.Progress -> TODO()
+                is UiModel.Placeholder -> TODO()
+                is UiModel.Data -> showViewData(it.data)
+            }
         })
+    }
+
+    fun showViewData(weather: CurrentWeather) {
+        location_title.text = weather.name
+        weather_desc.text = weather.weather[0].description // fixme check length
+        temp_desc.text = "Current: ${weather.main.temp}, Min: ${weather.main.temp_min}, Max: ${weather.main.temp_max}"
+        solar_desc.text = "Sunrise: ${Date(weather.sys.sunrise)}, Sunset: ${Date(weather.sys.sunset)}"
+        wind_desc.text = "Wind speed: ${weather.wind.speed}, Direction: ${weather.wind.deg}"
+        humidity_desc.text = "Humidity: ${weather.main.humidity}%"
     }
 }

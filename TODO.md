@@ -1,21 +1,19 @@
 ## In progress
 
-- Wrap response with Response/NetworkBoundResponse class
-- Begin binding data
 
 
 ## Backlog
 
-- LiveData/data binding according to architecture
-- Encapsulate debounce operator
 - Espresso tests
 - Unit Tests + mocking
 - Dex/APK size count (blocked, broken on Android 8.0)
 - Get location (with permission check, degrade to graceful behaviour)
-- Save multiple locations (way in the future)
-- Log module (bugsnag breadcrumbs, notify, timber)
-- Swap out schedulers (if needed)
+- Save most recent/multiple locations (way in the future)
 - Inject schedulers
+- Organise gradle deps and separate version
+- Create packages by feature
+- Add 5 day weather forecast
+
 
 
 ## Targets
@@ -43,3 +41,7 @@
 - RxBinding/RxJava: reactive bindings for the android framework
 - API keys: store in ~/.gradle/gradle.properties, add as environment variable on Travis
 - Setup extra non-null observe extension method for livedata: https://proandroiddev.com/nonnull-livedata-with-kotlin-extension-26963ffd0333
+- Log module (bugsnag breadcrumbs for non-fatal, notify for throwables, timber for debug)
+- Wrap response with UiModel sealed class, with 4 different states. Essentially passes messages back to a very dumb UI
+- Encapsulate debounce operator with extension
+
