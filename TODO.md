@@ -1,10 +1,9 @@
 ## In progress
 
+- Espresso tests, to test that the UI reacts to data correctly
 
 
 ## Backlog
-
-- Espresso tests
 - Dex/APK size count (blocked, broken on Android 8.0)
 - Get location (with permission check, degrade to graceful behaviour)
 - Save most recent/multiple locations (way in the future)
@@ -14,10 +13,9 @@
 - Add 5 day weather forecast
 - Test the model layer, view layer, and VM layer separately
 - Fix ./gradlew check not running tests
-
+- Parameterised Unit Tests to test unusual data
 
 ## Targets
-
 - Regular app
 - Instant App
 - Wear App
@@ -25,9 +23,7 @@
 - TV App
 - App slice
 
-
 # Completed!
-
 - Static analysis: Android Lint, KtLint (./gradlew lint check)
 - Obfuscation/minification: ProGuard
 - CI: Travis
@@ -44,5 +40,4 @@
 - Log module (bugsnag breadcrumbs for non-fatal, notify for throwables, timber for debug)
 - Wrap response with UiModel sealed class, with 4 different states. Essentially passes messages back to a very dumb UI
 - Encapsulate debounce operator with extension
-- Unit Tests + mocking
-
+- Unit Tests + mocking with mockito, to avoid massive dependency graphs

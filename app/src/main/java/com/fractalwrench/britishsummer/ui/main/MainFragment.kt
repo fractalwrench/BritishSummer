@@ -68,18 +68,19 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        weatherModel.weather.nonNullObserve(this, {
-            when (it) {
-                is UIState.Error -> TODO()
-                is UIState.Progress -> TODO()
-                is UIState.Placeholder -> TODO()
-                is UIState.Content -> showViewData(it.data)
-            }
-        })
+        weatherModel.weather.nonNullObserve(this, this::bindWeatherUiState)
     }
 
-    fun showViewData(weather: CurrentWeather) {
+    internal fun bindWeatherUiState(it: UIState<CurrentWeather>?) {
+        when (it) {
+            is UIState.Error -> TODO()
+            is UIState.Progress -> TODO()
+            is UIState.Placeholder -> TODO()
+            is UIState.Content -> showViewData(it.data)
+        }
+    }
+
+    private fun showViewData(weather: CurrentWeather) {
         location_title.text = weather.name
         weather_desc.text = weather.weather[0].description // fixme check length
         temp_desc.text = "Current: ${weather.main.temp}, Min: ${weather.main.temp_min}, Max: ${weather.main.temp_max}"
