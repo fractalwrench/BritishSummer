@@ -44,7 +44,7 @@ data class Sys(
 )
 
 @JsonClass(generateAdapter = true)
-data class Wind(val deg: Double, val speed: Double)
+data class Wind(val deg: Double?, val speed: Double)
 
 @JsonClass(generateAdapter = true)
 data class Weather(

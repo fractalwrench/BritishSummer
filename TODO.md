@@ -5,7 +5,6 @@
 ## Backlog
 
 - Espresso tests
-- Unit Tests + mocking
 - Dex/APK size count (blocked, broken on Android 8.0)
 - Get location (with permission check, degrade to graceful behaviour)
 - Save most recent/multiple locations (way in the future)
@@ -13,7 +12,8 @@
 - Organise gradle deps and separate version
 - Create packages by feature
 - Add 5 day weather forecast
-
+- Test the model layer, view layer, and VM layer separately
+- Fix ./gradlew check not running tests
 
 
 ## Targets
@@ -44,4 +44,5 @@
 - Log module (bugsnag breadcrumbs for non-fatal, notify for throwables, timber for debug)
 - Wrap response with UiModel sealed class, with 4 different states. Essentially passes messages back to a very dumb UI
 - Encapsulate debounce operator with extension
+- Unit Tests + mocking
 

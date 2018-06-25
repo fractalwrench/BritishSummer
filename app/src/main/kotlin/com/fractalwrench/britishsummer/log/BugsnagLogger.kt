@@ -3,7 +3,7 @@ package com.fractalwrench.britishsummer.log
 import com.bugsnag.android.Client
 import com.bugsnag.android.Severity
 
-class BugsnagLogger(private val client: Client) : Loggable {
+internal class BugsnagLogger(private val client: Client) : Loggable {
 
     override fun log(msg: String, throwable: Throwable?, logSeverity: LogSeverity) {
 
@@ -18,7 +18,7 @@ class BugsnagLogger(private val client: Client) : Loggable {
         }
     }
 
-    private fun mapBugsnagSeverity(logSeverity: LogSeverity): Severity {
+    internal fun mapBugsnagSeverity(logSeverity: LogSeverity): Severity {
         return when (logSeverity) {
             LogSeverity.WARNING -> Severity.WARNING
             LogSeverity.ERROR -> Severity.ERROR

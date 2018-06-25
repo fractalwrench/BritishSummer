@@ -1,6 +1,6 @@
 import com.fractalwrench.britishsummer.CurrentWeatherRepository
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
-val dataModule = applicationContext {
+val dataModule = module {
     bean { CurrentWeatherRepository(get()) }
 }

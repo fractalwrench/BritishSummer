@@ -3,7 +3,7 @@ package com.fractalwrench.britishsummer.log
 import com.fractalwrench.britishsummer.BuildConfig
 import timber.log.Timber
 
-class TimberLogger() : Loggable {
+internal class TimberLogger : Loggable {
 
     init {
         if (BuildConfig.DEBUG) {

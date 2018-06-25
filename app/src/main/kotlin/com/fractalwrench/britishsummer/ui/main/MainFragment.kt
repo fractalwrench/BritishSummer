@@ -8,12 +8,13 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import com.fractalwrench.britishsummer.CurrentWeather
 import com.fractalwrench.britishsummer.R
-import com.fractalwrench.britishsummer.UiModel
+import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.debounceUi
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.log.Logger
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.main_fragment.city_field
 import kotlinx.android.synthetic.main.main_fragment.humidity_desc
 import kotlinx.android.synthetic.main.main_fragment.location_title
@@ -33,6 +34,7 @@ class MainFragment : Fragment() {
 
     private val weatherModel: CurrentWeatherViewModel by viewModel()
     private val logger: Logger by inject()
+    private var compositeDisposable: CompositeDisposable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,18 +46,24 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        compositeDisposable = CompositeDisposable()
 
-//      TODO add to disposable
+        compositeDisposable?.add(
+            RxTextView.editorActions(city_field)
+                    .filter { it == EditorInfo.IME_ACTION_DONE }
+                    .debounceUi()
+                    .forEach {
+                        logger.log("Finding weather for city")
+                        val cityName = city_field.text.toString()
+                        weatherModel.showCity(cityName)
+                        context?.hideKeyboard(city_field)
+                    }
+        )
+    }
 
-        val disposable = RxTextView.editorActions(city_field)
-                .filter { it == EditorInfo.IME_ACTION_DONE }
-                .debounceUi()
-                .forEach {
-                    logger.log("Finding weather for city")
-                    val cityName = city_field.text.toString()
-                    weatherModel.showCity(cityName)
-                    context?.hideKeyboard(city_field)
-                }
+    override fun onDestroyView() {
+        compositeDisposable?.dispose()
+        super.onDestroyView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -63,10 +71,10 @@ class MainFragment : Fragment() {
 
         weatherModel.weather.nonNullObserve(this, {
             when (it) {
-                is UiModel.Error -> TODO()
-                is UiModel.Progress -> TODO()
-                is UiModel.Placeholder -> TODO()
-                is UiModel.Data -> showViewData(it.data)
+                is UIState.Error -> TODO()
+                is UIState.Progress -> TODO()
+                is UIState.Placeholder -> TODO()
+                is UIState.Content -> showViewData(it.data)
             }
         })
     }
