@@ -1,6 +1,7 @@
 ## In progress
 
 - Espresso tests, to test that the UI reacts to data correctly
+- Mockito on instrumentation tests
 
 
 ## Backlog

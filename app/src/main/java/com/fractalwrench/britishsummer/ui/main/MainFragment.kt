@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private val weatherModel: CurrentWeatherViewModel by viewModel()
+    internal val weatherModel: CurrentWeatherViewModel by viewModel()
     private val logger: Logger by inject()
     private var compositeDisposable: CompositeDisposable? = null
 

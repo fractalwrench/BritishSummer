@@ -55,8 +55,6 @@ dependencies {
 //    implementation "android.arch.navigation:navigation-testing-ktx:$androidKtxVersion"
 //    implementation "android.arch.navigation:navigation-ui-ktx:$androidKtxVersion"
 
-
-
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
