@@ -1,8 +1,6 @@
 ## In progress
 
 
-- Use custom scheduler for espresso tests: https://proandroiddev.com/testing-time-with-espresso-and-rxjava-e73c7496889
-
 ## Backlog
 - Dex/APK size count (blocked, broken on Android 8.0)
 - Get location (with permission check, degrade to graceful behaviour)
@@ -13,6 +11,8 @@
 - Add 5 day weather forecast
 - Fix ./gradlew check not running tests
 - Parameterised Unit Tests to test unusual data
+- Tidy up source files
+- Document source files unlikely to change
 
 ## Targets
 - Regular app
@@ -41,4 +41,5 @@
 - Encapsulate debounce operator with extension
 - Unit Tests + mocking with mockito, to avoid massive dependency graphs
 - Espresso tests, to test that the UI displays state and reacts to events correctly
+- Use custom scheduler for espresso tests: https://proandroiddev.com/testing-time-with-espresso-and-rxjava-e73c7496889
 

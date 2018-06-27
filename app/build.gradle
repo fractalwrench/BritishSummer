@@ -38,14 +38,21 @@ android {
     lintOptions {
         abortOnError true
     }
-    sourceSets {
-        test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
-    }
-    testOptions {
-        animationsDisabled = true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 apply from: 'dependencies.gradle'
 apply from: 'static-analysis.gradle'
+
+// fail build on compiler warnings
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        allWarningsAsErrors = true
+    }
+}

@@ -1,15 +1,10 @@
 package com.fractalwrench.britishsummer
 
-import android.view.KeyEvent
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.pressImeActionButton
-import androidx.test.espresso.action.ViewActions.pressKey
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.idling.CountingIdlingResource
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
@@ -18,8 +13,6 @@ import com.fractalwrench.britishsummer.log.Logger
 import com.fractalwrench.britishsummer.ui.main.CurrentWeatherViewModel
 import com.fractalwrench.britishsummer.ui.main.MainFragment
 import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Rule
 

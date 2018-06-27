@@ -1,6 +1,7 @@
 package com.fractalwrench.britishsummer
 
 import org.junit.Assert.assertNotNull
+import org.junit.Assert.fail
 import org.junit.Test
 
 class CurrentWeatherTest {
@@ -14,5 +15,6 @@ class CurrentWeatherTest {
         assertNotNull(json)
         val response = adapter.fromJson(json)
         assertNotNull(response)
+        fail()
     }
 }
