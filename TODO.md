@@ -1,8 +1,7 @@
 ## In progress
 
-- Espresso tests, to test that the UI reacts to data correctly
-- Mockito on instrumentation tests
 
+- Use custom scheduler for espresso tests: https://proandroiddev.com/testing-time-with-espresso-and-rxjava-e73c7496889
 
 ## Backlog
 - Dex/APK size count (blocked, broken on Android 8.0)
@@ -42,3 +41,5 @@
 - Wrap response with UiModel sealed class, with 4 different states. Essentially passes messages back to a very dumb UI
 - Encapsulate debounce operator with extension
 - Unit Tests + mocking with mockito, to avoid massive dependency graphs
+- Espresso tests, to test that the UI displays state and reacts to events correctly
+

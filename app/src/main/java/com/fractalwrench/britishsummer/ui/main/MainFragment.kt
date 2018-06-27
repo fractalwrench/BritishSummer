@@ -14,7 +14,11 @@ import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.log.Logger
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.Disposables
 import kotlinx.android.synthetic.main.main_fragment.city_field
 import kotlinx.android.synthetic.main.main_fragment.humidity_desc
 import kotlinx.android.synthetic.main.main_fragment.location_title
@@ -25,6 +29,24 @@ import kotlinx.android.synthetic.main.main_fragment.wind_desc
 import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
 import java.util.Date
+import java.util.concurrent.TimeUnit
+
+/**
+ * Scheduler that instantly executes the task.
+ */
+class InstantScheduler : Scheduler() {
+    override fun createWorker(): Worker =
+            object : Worker() {
+                override fun isDisposed(): Boolean = false
+
+                override fun dispose() = Unit
+
+                override fun schedule(run: Runnable, delay: Long, unit: TimeUnit): Disposable {
+                    run.run()
+                    return Disposables.empty()
+                }
+            }
+}
 
 class MainFragment : Fragment() {
 
