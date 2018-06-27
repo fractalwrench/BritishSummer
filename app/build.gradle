@@ -56,3 +56,13 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         allWarningsAsErrors = true
     }
 }
+
+// make kotlin tests run in non-debug mode on IDE
+// see https://proandroiddev.com/using-kotlin-for-tests-in-android-6d4a0c818776
+afterEvaluate {
+    android.sourceSets.all { sourceSet ->
+        if (!sourceSet.name.startsWith("test")) {
+            sourceSet.kotlin.setSrcDirs([])
+        }
+    }
+}
