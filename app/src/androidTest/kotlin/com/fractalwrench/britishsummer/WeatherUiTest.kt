@@ -1,6 +1,9 @@
 package com.fractalwrench.britishsummer
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -15,6 +18,9 @@ import org.junit.Rule
 
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.android.architecture.ext.koin.viewModel
+import org.koin.dsl.module.module
+import org.koin.standalone.StandAloneContext.loadKoinModules
 
 @RunWith(AndroidJUnit4::class)
 class WeatherUiTest {
@@ -58,12 +64,15 @@ class WeatherUiTest {
     fun showsContent() {
         val data = loadCurrentWeather()
 
+
         activityRule.activity.runOnUiThread {
             weatherModel.weather.value = UIState.Content(data)
         }
 
         onView(withId(R.id.location_title))
                 .check(matches(withText(data.name)))
+
+
 
         // TODO add checks for other fields and other states
     }

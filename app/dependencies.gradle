@@ -11,12 +11,10 @@ ext {
     bugsnagVersion = "4.5.0"
 
     junitVersion = "4.12"
+    mockitoVersion = "2.19.0"
     testRunnerVersion = "1.1.0-alpha3"
     espressoVersion = "3.1.0-alpha3"
     moshiVersion = "1.6.0"
-
-    mockitoVersion = "2.7.19"
-    dexmakerVersion = "2.2.0"
 }
 
 dependencies {
@@ -63,7 +61,4 @@ dependencies {
     androidTestImplementation "androidx.test:runner:$testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test:rules:$testRunnerVersion"
-
-    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexmakerVersion"
-    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion", { exclude group: 'net.bytebuddy' }
 }

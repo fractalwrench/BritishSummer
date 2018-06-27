@@ -4,13 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fractalwrench.britishsummer.CurrentWeather
 import com.fractalwrench.britishsummer.CurrentWeatherRepository
-import com.fractalwrench.britishsummer.OpenClass
-import com.fractalwrench.britishsummer.OpenForTesting
 import com.fractalwrench.britishsummer.UIState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-@OpenForTesting
 class CurrentWeatherViewModel(private val repository: CurrentWeatherRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
