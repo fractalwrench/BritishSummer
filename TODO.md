@@ -11,7 +11,6 @@
 - Organise gradle deps and separate version
 - Create packages by feature
 - Add 5 day weather forecast
-- Test the model layer, view layer, and VM layer separately
 - Fix ./gradlew check not running tests
 - Parameterised Unit Tests to test unusual data
 

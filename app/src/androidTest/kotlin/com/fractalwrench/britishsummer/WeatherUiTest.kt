@@ -93,11 +93,15 @@ class WeatherUiTest {
 
     @Test
     fun requestsCityWeather() {
+        TimeScheduler.timeSchedulerHandler = { default, tag ->
+            if (tag == "click_debounce") InstantScheduler else default
+        }
+
         onView(withId(R.id.city_field))
                 .perform(typeText("some query"), closeSoftKeyboard())
                 .perform(pressImeActionButton())
 
-        Thread.sleep(1000) // FIXME horrible hack, use schedulers instead
+//        Thread.sleep(1000) // FIXME horrible hack, use schedulers instead
 
         onView(withId(R.id.location_title))
                 .check(matches(withText("London")))
