@@ -1,7 +1,6 @@
 ## In progress
 
 - Espresso tests, to test that the UI reacts to data correctly
-- Mockito on instrumentation tests
 
 
 ## Backlog
@@ -15,6 +14,7 @@
 - Test the model layer, view layer, and VM layer separately
 - Fix ./gradlew check not running tests
 - Parameterised Unit Tests to test unusual data
+- Mockito on instrumentation tests (not sure working on P)
 
 ## Targets
 - Regular app
