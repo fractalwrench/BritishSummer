@@ -42,6 +42,7 @@ fun interceptor(weatherApiKey: String): Interceptor { // TODO test me
         val request = it.request()
         val adaptedUrl = request.url().newBuilder()
                 .addQueryParameter("appid", weatherApiKey)
+                .addQueryParameter("units", "metric")
                 .build()
 
         val adaptedRequest = request.newBuilder().url(adaptedUrl).build()

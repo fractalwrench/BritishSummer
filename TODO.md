@@ -15,7 +15,6 @@
 - Document source files unlikely to change
 - Disable animations automatically with Espresso
 - Dex/APK size count (blocked, broken on Android 8.0)
-- Test common (for resources, other shared things)
 - Test ProGuard
 
 ## Targets
@@ -47,4 +46,5 @@
 - Espresso tests, to test that the UI displays state and reacts to events correctly
 - Use custom scheduler for espresso tests: https://proandroiddev.com/testing-time-with-espresso-and-rxjava-e73c7496889
 - Fix ./gradlew check not running tests
-
+- Test common (for resources, other shared things)
+- Request in metric
