@@ -5,14 +5,10 @@ import org.junit.Test
 
 class CurrentWeatherTest {
 
-    private val moshi = moshi()
-    private val adapter = moshi.adapter<CurrentWeather>(CurrentWeather::class.java)
-
     @Test
     fun testSerialisation() {
-        val json = javaClass.getResource("/current_weather.json").readText()
-        assertNotNull(json)
-        val response = adapter.fromJson(json)
+        val response: CurrentWeather = JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
         assertNotNull(response)
     }
+
 }

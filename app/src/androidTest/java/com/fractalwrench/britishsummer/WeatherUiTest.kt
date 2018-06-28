@@ -38,6 +38,10 @@ class WeatherUiTest {
                 single { CurrentWeatherRepository(get()) }
                 single {
                     val weatherApi: WeatherApi = object : WeatherApi {
+                        override fun getWeatherForecast(cityName: String): Observable<Forecast> {
+                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        }
+
                         override fun getCurrentWeather(cityName: String): Observable<CurrentWeather> {
                             return Observable.just(weatherData)
                         }
@@ -94,18 +98,11 @@ class WeatherUiTest {
                 .perform(typeText("some query"), closeSoftKeyboard())
                 .perform(pressImeActionButton())
 
-//        Thread.sleep(1000) // FIXME horrible hack, use schedulers instead
-
         onView(withId(R.id.location_title))
                 .check(matches(withText("London")))
     }
 
-    // FIXME DRY
-    private val moshi = moshi()
-    private val adapter = moshi.adapter<CurrentWeather>(CurrentWeather::class.java)
-
     fun loadCurrentWeather(): CurrentWeather {
-        val json = javaClass.getResource("/current_weather.json").readText()
-        return adapter.fromJson(json)!!
+        return JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
     }
 }
