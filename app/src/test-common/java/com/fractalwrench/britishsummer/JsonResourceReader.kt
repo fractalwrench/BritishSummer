@@ -8,5 +8,4 @@ internal class JsonResourceReader {
         val json = javaClass.getResource(name).readText()
         return adapter.fromJson(json)!!
     }
-
 }

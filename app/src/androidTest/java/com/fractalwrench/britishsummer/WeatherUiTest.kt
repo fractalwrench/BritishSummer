@@ -39,7 +39,7 @@ class WeatherUiTest {
                 single {
                     val weatherApi: WeatherApi = object : WeatherApi {
                         override fun getWeatherForecast(cityName: String): Observable<Forecast> {
-                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
                         }
 
                         override fun getCurrentWeather(cityName: String): Observable<CurrentWeather> {

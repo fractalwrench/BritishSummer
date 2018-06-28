@@ -3,11 +3,11 @@ package com.fractalwrench.britishsummer
 import org.junit.Assert.assertNotNull
 import org.junit.Test
 
-class CurrentWeatherTest {
+class ForecastTest {
 
     @Test
     fun testSerialisation() {
-        val response: CurrentWeather = JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
+        val response: Forecast = JsonResourceReader().readJsonResource("/forecast.json", Forecast::class.java)
         assertNotNull(response)
     }
 }

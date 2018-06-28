@@ -2,7 +2,6 @@ package com.fractalwrench.britishsummer
 
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import okhttp3.ResponseBody
 
 class CurrentWeatherRepository(private val weatherApi: WeatherApi) {
 
@@ -13,5 +12,4 @@ class CurrentWeatherRepository(private val weatherApi: WeatherApi) {
     fun getWeatherForecast(cityName: String): Flowable<Forecast> {
         return weatherApi.getWeatherForecast(cityName).toFlowable(BackpressureStrategy.BUFFER)
     }
-
 }

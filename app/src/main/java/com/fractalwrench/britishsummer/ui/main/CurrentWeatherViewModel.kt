@@ -25,7 +25,6 @@ class CurrentWeatherViewModel(private val repository: CurrentWeatherRepository) 
                 .subscribe {
                     it.toString()
                 }
-
     }
 
     override fun onCleared() {
