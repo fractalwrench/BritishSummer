@@ -2,7 +2,6 @@
 
 
 ## Backlog
-- Dex/APK size count (blocked, broken on Android 8.0)
 - Get location (with permission check, degrade to graceful behaviour)
 - Save most recent/multiple locations (way in the future)
 - Inject schedulers
@@ -13,6 +12,8 @@
 - Tidy up source files
 - Document source files unlikely to change
 - Disable animations automatically with Espresso
+- Dex/APK size count (blocked, broken on Android 8.0)
+- Test common (for resources, other shared things)
 
 ## Targets
 - Regular app

@@ -19,6 +19,13 @@ class CurrentWeatherViewModel(private val repository: CurrentWeatherRepository) 
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { weather.value = UIState.Content(it) }
         )
+
+        repository.getWeatherForecast(cityName)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    it.toString()
+                }
+
     }
 
     override fun onCleared() {
