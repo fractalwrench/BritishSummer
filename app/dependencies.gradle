@@ -27,6 +27,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
+    implementation "androidx.recyclerview:recyclerview:$appcompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
     implementation "com.bugsnag:bugsnag-android:$bugsnagVersion"
