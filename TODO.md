@@ -15,6 +15,7 @@
 - Tidy up source files
 - Disable animations automatically with Espresso
 - Dex/APK size count (blocked, broken on Android 8.0)
+- Signing config in gradle
 
 ## Targets
 - Regular app
