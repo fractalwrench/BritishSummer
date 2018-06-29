@@ -1,38 +1,31 @@
-package com.fractalwrench.britishsummer.weather.current
+package com.fractalwrench.britishsummer.weather.forecast
 
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.fractalwrench.britishsummer.BaseFragment
-import com.fractalwrench.britishsummer.weather.CurrentWeather
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
-import com.fractalwrench.britishsummer.weather.forecast.ForecastFragment
+import com.fractalwrench.britishsummer.weather.Forecast
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.current_weather_fragment.city_field
-import kotlinx.android.synthetic.main.current_weather_fragment.humidity_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.location_title
-import kotlinx.android.synthetic.main.current_weather_fragment.solar_desc
-import kotlinx.android.synthetic.main.current_weather_fragment.temp_desc
-import kotlinx.android.synthetic.main.current_weather_fragment.weather_desc
-import kotlinx.android.synthetic.main.current_weather_fragment.wind_desc
 import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
-import java.util.Date
 import java.util.concurrent.TimeUnit
 
-class CurrentWeatherFragment : BaseFragment() {
+class ForecastFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = CurrentWeatherFragment()
+        fun newInstance() = ForecastFragment()
     }
 
     internal val scheduler: Scheduler by inject("ui")
-    internal val viewModel: CurrentWeatherViewModel by viewModel()
-    override val layoutId: Int = R.layout.current_weather_fragment
+    internal val viewModel: ForecastViewModel by viewModel()
+    override val layoutId: Int = R.layout.forecast_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +40,7 @@ class CurrentWeatherFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.weather.nonNullObserve(this, this::bindWeatherUiState)
+        viewModel.forecast.nonNullObserve(this, this::bindWeatherUiState)
     }
 
     private fun handleNewLocation() {
@@ -57,7 +50,7 @@ class CurrentWeatherFragment : BaseFragment() {
         context?.hideKeyboard(city_field)
     }
 
-    private fun bindWeatherUiState(it: UIState<CurrentWeather>?) {
+    private fun bindWeatherUiState(it: UIState<Forecast>?) {
         when (it) {
             is UIState.Error -> TODO()
             is UIState.Progress -> TODO()
@@ -66,12 +59,7 @@ class CurrentWeatherFragment : BaseFragment() {
         }
     }
 
-    private fun showViewData(weather: CurrentWeather) {
-        location_title.text = weather.name
-        weather_desc.text = weather.weather?.get(0)?.description // fixme check length
-        temp_desc.text = "Current: ${weather.main?.temp}, Min: ${weather.main?.temp_min}, Max: ${weather.main?.temp_max}"
-        solar_desc.text = "Sunrise: ${Date(weather.sys?.sunrise!!)}, Sunset: ${Date(weather.sys.sunset!!)}"
-        wind_desc.text = "Wind speed: ${weather.wind?.speed}, Direction: ${weather.wind?.deg}"
-        humidity_desc.text = "Humidity: ${weather.main?.humidity}%"
+    private fun showViewData(forecast: Forecast) {
+        location_title.text = forecast.city?.name
     }
 }

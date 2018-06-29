@@ -10,6 +10,8 @@ import org.junit.Rule
 
 import org.junit.runner.RunWith
 import org.koin.dsl.module.module
+import org.koin.standalone.StandAloneContext
+import org.koin.standalone.StandAloneContext.closeKoin
 import org.koin.standalone.StandAloneContext.loadKoinModules
 
 @RunWith(AndroidJUnit4::class)
@@ -20,6 +22,9 @@ abstract class FragmentUiTest {
     val activityRule = object : ActivityTestRule<SingleFragmentActivity>(SingleFragmentActivity::class.java, true, true) {
         override fun beforeActivityLaunched() {
             super.beforeActivityLaunched()
+
+            // close any previous koin contexts
+            closeKoin()
 
             val testDoubles = module {
                 // schedulers
@@ -34,6 +39,7 @@ abstract class FragmentUiTest {
             loadKoinModules(listOf(testDoubles))
 
             // inject any other values required
+
             inject()
         }
     }

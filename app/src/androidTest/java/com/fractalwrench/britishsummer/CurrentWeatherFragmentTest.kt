@@ -7,21 +7,14 @@ import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import com.fractalwrench.britishsummer.log.Logger
 import com.fractalwrench.britishsummer.weather.CurrentWeather
-import com.fractalwrench.britishsummer.weather.Forecast
-import com.fractalwrench.britishsummer.weather.current.CurrentWeatherViewModel
-import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.fractalwrench.britishsummer.weather.WeatherRepository
+import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
+import com.fractalwrench.britishsummer.weather.current.CurrentWeatherViewModel
 import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import org.junit.Before
-import org.junit.Rule
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,26 +23,26 @@ import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 
 @RunWith(AndroidJUnit4::class)
-class WeatherUiTest : FragmentUiTest() {
+class CurrentWeatherFragmentTest : FragmentUiTest() {
 
-    private lateinit var weatherData: CurrentWeather
-    private val fragment = CurrentWeatherFragment()
+    private lateinit var content: CurrentWeather
+    private val fragment = CurrentWeatherFragment.newInstance()
     private lateinit var weatherModel: CurrentWeatherViewModel
 
     @Before
     fun setUp() {
-        weatherData = JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
+        content = JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
         addFragmentToSingleActivity(fragment)
 
         activityRule.activity.runOnUiThread {
-            weatherModel = fragment.weatherModel
+            weatherModel = fragment.viewModel
         }
     }
 
     override fun inject() {
         val weatherApi: WeatherApi = object : WeatherApi {
             override fun getWeatherForecast(cityName: String) = TODO()
-            override fun getCurrentWeather(cityName: String) = Observable.just(weatherData)
+            override fun getCurrentWeather(cityName: String) = Observable.just(content)
         }
 
         val testDoubleModule = module {
@@ -66,11 +59,11 @@ class WeatherUiTest : FragmentUiTest() {
     @Test
     fun showsContent() {
         activityRule.activity.runOnUiThread {
-            weatherModel.weather.value = UIState.Content(weatherData)
+            weatherModel.weather.value = UIState.Content(content)
         }
 
         onView(withId(R.id.location_title))
-            .check(matches(withText(weatherData.name)))
+            .check(matches(withText(content.name)))
 
         // TODO add checks for other fields and other states
     }
