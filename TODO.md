@@ -1,12 +1,10 @@
 ## In progress
 
-- Tidy up timehandler
 - Add 5 day weather forecast screen
 
 ## Backlog
 - Get location (with permission check, degrade to graceful behaviour)
 - Save most recent/multiple locations (way in the future)
-- Inject schedulers
 - Test etags/cache
 
 ## Targets
@@ -43,4 +41,5 @@
 - Ensure that everything is serialised properly, add inline docs for fields
 - Create packages by feature
 - Tidy up instrumentation test DI
-
+- Tidy up timehandler
+- Inject schedulers (makes espresso testing easier)

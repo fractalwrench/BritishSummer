@@ -19,7 +19,3 @@ internal fun Context.showKeyboard(view: View) {
     val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.showSoftInput(view, 0)
 }
-
-fun <T> Observable<T>.debounceUi(ms: Long = 1000): Observable<T> {
-    return this.debounce(ms, TimeUnit.MILLISECONDS, TimeScheduler.time("click_debounce"))
-}

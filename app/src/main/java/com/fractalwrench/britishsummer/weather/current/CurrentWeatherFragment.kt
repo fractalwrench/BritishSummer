@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.fractalwrench.britishsummer.BaseFragment
+import com.fractalwrench.britishsummer.InstantScheduler
 import com.fractalwrench.britishsummer.weather.CurrentWeather
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
-import com.fractalwrench.britishsummer.debounceUi
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.jakewharton.rxbinding2.widget.RxTextView
+import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.current_weather_fragment.city_field
 import kotlinx.android.synthetic.main.current_weather_fragment.humidity_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.location_title
@@ -19,7 +20,9 @@ import kotlinx.android.synthetic.main.current_weather_fragment.temp_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.weather_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.wind_desc
 import org.koin.android.architecture.ext.android.viewModel
+import org.koin.android.ext.android.inject
 import java.util.Date
+import java.util.concurrent.TimeUnit
 
 class CurrentWeatherFragment : BaseFragment() {
 
@@ -27,6 +30,7 @@ class CurrentWeatherFragment : BaseFragment() {
         fun newInstance() = CurrentWeatherFragment()
     }
 
+    internal val scheduler: Scheduler by inject("ui")
     internal val weatherModel: CurrentWeatherViewModel by viewModel()
     override val layoutId: Int = R.layout.current_weather_fragment
 
@@ -36,7 +40,7 @@ class CurrentWeatherFragment : BaseFragment() {
         compositeDisposable?.add(
             RxTextView.editorActions(city_field)
                 .filter { it == EditorInfo.IME_ACTION_DONE }
-                .debounceUi()
+                .debounce(1000, TimeUnit.MILLISECONDS, scheduler)
                 .forEach { handleNewLocation() }
         )
     }

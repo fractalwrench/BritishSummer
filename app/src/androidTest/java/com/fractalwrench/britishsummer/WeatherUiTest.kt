@@ -17,6 +17,7 @@ import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.fractalwrench.britishsummer.weather.WeatherRepository
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.junit.Before
@@ -55,15 +56,8 @@ class WeatherUiTest : FragmentUiTest() {
             viewModel { CurrentWeatherViewModel(get(), get("ui")) }
             single { WeatherRepository(get()) }
             single { weatherApi }
-            single { Logger(arrayOf()) }
         }
-
-        val testSchedulers = module {
-            single("ui", { AndroidSchedulers.mainThread() })
-            single("io", { Schedulers.io() })
-            single("compute", { Schedulers.computation() })
-        }
-        loadKoinModules(listOf(testDoubleModule, testSchedulers))
+        loadKoinModules(listOf(testDoubleModule))
     }
 
     /**
@@ -87,10 +81,6 @@ class WeatherUiTest : FragmentUiTest() {
      */
     @Test
     fun requestsCityWeather() {
-        TimeScheduler.timeSchedulerHandler = { default, tag ->
-            if (tag == "click_debounce") InstantScheduler else default
-        }
-
         onView(withId(R.id.city_field))
             .perform(typeText("some query"), closeSoftKeyboard())
             .perform(pressImeActionButton())
