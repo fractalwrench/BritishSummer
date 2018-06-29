@@ -6,6 +6,9 @@
 - Get location (with permission check, degrade to graceful behaviour)
 - Save most recent/multiple locations (way in the future)
 - Test etags/cache
+- Handle error, progress, placeholder conditions
+- Handle scrolling of screen
+- Weather map layers? https://openweathermap.org/api/weathermaps
 
 ## Targets
 - Regular app
