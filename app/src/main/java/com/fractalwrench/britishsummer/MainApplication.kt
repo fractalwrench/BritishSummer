@@ -18,7 +18,7 @@ class MainApplication : Application() {
         val apiKey = getString(R.string.weather_api_key)
         val networkModule = generateNetworkModule(baseUrl, apiKey)
         val logModule = generateLogModule(client)
-        val modules = listOf(androidModule, weatherModule, networkModule, logModule)
+        val modules = listOf(androidModule, weatherModule, networkModule, logModule, schedulerModule)
         startKoin(this, modules)
     }
 }

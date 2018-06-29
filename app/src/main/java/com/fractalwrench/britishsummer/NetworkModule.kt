@@ -4,6 +4,7 @@ import android.content.Context
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
+import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.Interceptor
@@ -18,7 +19,7 @@ import java.util.Date
 
 internal fun generateNetworkModule(baseUrl: String, weatherApiKey: String): Module {
     return module {
-        single { retrofit(get(), get(), baseUrl) }
+        single { retrofit(get(), get(), baseUrl, get("io")) }
         single { cache(get()) }
         single { weatherApi(get()) }
         factory { moshi() }
@@ -55,7 +56,7 @@ private fun converterFactory(moshi: Moshi): Converter.Factory {
     return MoshiConverterFactory.create(moshi)
 }
 
-private fun cache(context: Context): Cache { // TODO test me!
+private fun cache(context: Context): Cache {
     return Cache(context.cacheDir, 16 * 1024 * 1024)
 }
 
@@ -66,11 +67,14 @@ private fun okHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient {
         .build()
 }
 
-private fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory, baseUrl: String): Retrofit {
+private fun retrofit(httpClient: OkHttpClient,
+                     converterFactory: Converter.Factory,
+                     baseUrl: String,
+                     scheduler: Scheduler): Retrofit {
     return Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(httpClient)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(scheduler))
         .addConverterFactory(converterFactory)
         .build()
 }

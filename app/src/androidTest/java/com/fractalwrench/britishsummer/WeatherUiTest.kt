@@ -17,6 +17,8 @@ import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.fractalwrench.britishsummer.weather.WeatherRepository
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.junit.Before
 import org.junit.Rule
 
@@ -50,12 +52,18 @@ class WeatherUiTest : FragmentUiTest() {
         }
 
         val testDoubleModule = module {
-            viewModel { CurrentWeatherViewModel(get()) }
+            viewModel { CurrentWeatherViewModel(get(), get("ui")) }
             single { WeatherRepository(get()) }
             single { weatherApi }
             single { Logger(arrayOf()) }
         }
-        loadKoinModules(listOf(testDoubleModule))
+
+        val testSchedulers = module {
+            single("ui", { AndroidSchedulers.mainThread() })
+            single("io", { Schedulers.io() })
+            single("compute", { Schedulers.computation() })
+        }
+        loadKoinModules(listOf(testDoubleModule, testSchedulers))
     }
 
     /**
