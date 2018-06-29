@@ -6,6 +6,7 @@ ext {
     constraintLayoutVersion = "1.1.2"
 
     koinVersion = "1.0.0-alpha-12"
+
     retrofitVersion = "2.4.0"
     timberVersion = "4.7.0"
     bugsnagVersion = "4.5.0"
@@ -15,12 +16,15 @@ ext {
     testRunnerVersion = "1.1.0-alpha3"
     espressoVersion = "3.1.0-alpha3"
     moshiVersion = "1.6.0"
+
+    rxJavaVersion = "2.1.10"
+    rxKotlinVersion = "2.2.0"
+    rxAndroidVersion = "2.0.2"
+    rxBindingVersion = "2.1.1"
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
-    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
@@ -28,7 +32,7 @@ dependencies {
     implementation "com.bugsnag:bugsnag-android:$bugsnagVersion"
 
     implementation "org.koin:koin-android:$koinVersion"
-    implementation "org.koin:koin-androidx:1.0.0-alpha-12"
+    implementation "org.koin:koin-androidx:$koinVersion"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
@@ -42,24 +46,18 @@ dependencies {
 
     implementation "com.jakewharton.timber:timber:$timberVersion"
 
-    implementation "io.reactivex.rxjava2:rxjava:2.1.10"
-    implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.2"
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
 
     implementation "androidx.core:core-ktx:$androidKtxVersion"
     implementation "androidx.collection:collection-ktx:$androidKtxVersion"
 
-
-//    implementation "android.arch.navigation:navigation-common-ktx:$androidKtxVersion"
-//    implementation "android.arch.navigation:navigation-fragment-ktx:$androidKtxVersion"
-//    implementation "android.arch.navigation:navigation-runtime-ktx:$androidKtxVersion"
-//    implementation "android.arch.navigation:navigation-testing-ktx:$androidKtxVersion"
-//    implementation "android.arch.navigation:navigation-ui-ktx:$androidKtxVersion"
-
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
-
+    testImplementation "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
     androidTestImplementation "androidx.test:runner:$testRunnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"

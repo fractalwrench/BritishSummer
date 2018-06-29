@@ -2,20 +2,13 @@
 
 - Tidy up timehandler
 - Tidy up instrumentation test DI
-- Test ProGuard
 - Test etags/cache
-- Add 5 day weather forecast
+- Add 5 day weather forecast screen
 
 ## Backlog
 - Get location (with permission check, degrade to graceful behaviour)
 - Save most recent/multiple locations (way in the future)
 - Inject schedulers
-- Organise gradle deps and separate version
-- Create packages by feature
-- Tidy up source files
-- Disable animations automatically with Espresso
-- Dex/APK size count (blocked, broken on Android 8.0)
-- Signing config in gradle
 
 ## Targets
 - Regular app
@@ -49,3 +42,5 @@
 - Test common (for resources, other shared things)
 - Request in metric
 - Ensure that everything is serialised properly, add inline docs for fields
+- Create packages by feature
+
