@@ -1,69 +1,44 @@
 package com.fractalwrench.britishsummer.weather.current
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.fragment.app.Fragment
+import com.fractalwrench.britishsummer.BaseFragment
 import com.fractalwrench.britishsummer.weather.CurrentWeather
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.debounceUi
 import com.fractalwrench.britishsummer.hideKeyboard
-import com.fractalwrench.britishsummer.log.Logger
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.jakewharton.rxbinding2.widget.RxTextView
-import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.main_fragment.city_field
-import kotlinx.android.synthetic.main.main_fragment.humidity_desc
-import kotlinx.android.synthetic.main.main_fragment.location_title
-import kotlinx.android.synthetic.main.main_fragment.solar_desc
-import kotlinx.android.synthetic.main.main_fragment.temp_desc
-import kotlinx.android.synthetic.main.main_fragment.weather_desc
-import kotlinx.android.synthetic.main.main_fragment.wind_desc
+import kotlinx.android.synthetic.main.current_weather_fragment.city_field
+import kotlinx.android.synthetic.main.current_weather_fragment.humidity_desc
+import kotlinx.android.synthetic.main.current_weather_fragment.location_title
+import kotlinx.android.synthetic.main.current_weather_fragment.solar_desc
+import kotlinx.android.synthetic.main.current_weather_fragment.temp_desc
+import kotlinx.android.synthetic.main.current_weather_fragment.weather_desc
+import kotlinx.android.synthetic.main.current_weather_fragment.wind_desc
 import org.koin.android.architecture.ext.android.viewModel
-import org.koin.android.ext.android.inject
 import java.util.Date
 
-class CurrentWeatherFragment : Fragment() {
+class CurrentWeatherFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = CurrentWeatherFragment()
     }
 
     internal val weatherModel: CurrentWeatherViewModel by viewModel()
-    private val logger: Logger by inject()
-    private var compositeDisposable: CompositeDisposable? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
-    }
+    override val layoutId: Int = R.layout.current_weather_fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        compositeDisposable = CompositeDisposable()
 
         compositeDisposable?.add(
             RxTextView.editorActions(city_field)
-                    .filter { it == EditorInfo.IME_ACTION_DONE }
-                    .debounceUi()
-                    .forEach {
-                        logger.log("Finding weather for city")
-                        val cityName = city_field.text.toString()
-                        weatherModel.showCity(cityName)
-                        context?.hideKeyboard(city_field)
-                    }
+                .filter { it == EditorInfo.IME_ACTION_DONE }
+                .debounceUi()
+                .forEach { handleNewLocation() }
         )
-    }
-
-    override fun onDestroyView() {
-        compositeDisposable?.dispose()
-        super.onDestroyView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -71,7 +46,14 @@ class CurrentWeatherFragment : Fragment() {
         weatherModel.weather.nonNullObserve(this, this::bindWeatherUiState)
     }
 
-    internal fun bindWeatherUiState(it: UIState<CurrentWeather>?) {
+    private fun handleNewLocation() {
+        logger.log("Finding weather for city")
+        val cityName = city_field.text.toString()
+        weatherModel.showCity(cityName)
+        context?.hideKeyboard(city_field)
+    }
+
+    private fun bindWeatherUiState(it: UIState<CurrentWeather>?) {
         when (it) {
             is UIState.Error -> TODO()
             is UIState.Progress -> TODO()

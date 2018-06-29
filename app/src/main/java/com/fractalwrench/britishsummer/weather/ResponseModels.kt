@@ -2,6 +2,7 @@ package com.fractalwrench.britishsummer.weather
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.util.Arrays
 
 /**
  * Represents the current weather in a given location
@@ -68,7 +69,45 @@ data class CurrentWeather(
      * The volume of snow in the near-past
      */
     val snow: Precipitation?
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as CurrentWeather
+
+        if (clouds != other.clouds) return false
+        if (coord != other.coord) return false
+        if (dt != other.dt) return false
+        if (id != other.id) return false
+        if (main != other.main) return false
+        if (name != other.name) return false
+        if (sys != other.sys) return false
+        if (visibility != other.visibility) return false
+        if (!Arrays.equals(weather, other.weather)) return false
+        if (wind != other.wind) return false
+        if (rain != other.rain) return false
+        if (snow != other.snow) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = clouds?.hashCode() ?: 0
+        result = 31 * result + (coord?.hashCode() ?: 0)
+        result = 31 * result + (dt?.hashCode() ?: 0)
+        result = 31 * result + (id?.hashCode() ?: 0)
+        result = 31 * result + (main?.hashCode() ?: 0)
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (sys?.hashCode() ?: 0)
+        result = 31 * result + (visibility ?: 0)
+        result = 31 * result + (weather?.let { Arrays.hashCode(it) } ?: 0)
+        result = 31 * result + (wind?.hashCode() ?: 0)
+        result = 31 * result + (rain?.hashCode() ?: 0)
+        result = 31 * result + (snow?.hashCode() ?: 0)
+        return result
+    }
+}
 
 /**
  * Represents the degree of cloudiness
@@ -227,7 +266,27 @@ data class Forecast(
      * The list of forecasts
      */
     val list: Array<List>?
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Forecast
+
+        if (city != other.city) return false
+        if (cnt != other.cnt) return false
+        if (!Arrays.equals(list, other.list)) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = city?.hashCode() ?: 0
+        result = 31 * result + (cnt ?: 0)
+        result = 31 * result + (list?.let { Arrays.hashCode(it) } ?: 0)
+        return result
+    }
+}
 
 /**
  * Represents information on a given settlement
@@ -301,7 +360,37 @@ data class List(
      * The volume of snow in the near-past
      */
     val snow: Precipitation?
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as List
+
+        if (clouds != other.clouds) return false
+        if (dt != other.dt) return false
+        if (main != other.main) return false
+        if (!Arrays.equals(weather, other.weather)) return false
+        if (sys != other.sys) return false
+        if (wind != other.wind) return false
+        if (rain != other.rain) return false
+        if (snow != other.snow) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = clouds?.hashCode() ?: 0
+        result = 31 * result + (dt?.hashCode() ?: 0)
+        result = 31 * result + (main?.hashCode() ?: 0)
+        result = 31 * result + (weather?.let { Arrays.hashCode(it) } ?: 0)
+        result = 31 * result + (sys?.hashCode() ?: 0)
+        result = 31 * result + (wind?.hashCode() ?: 0)
+        result = 31 * result + (rain?.hashCode() ?: 0)
+        result = 31 * result + (snow?.hashCode() ?: 0)
+        return result
+    }
+}
 
 /**
  * Represents near-past precipitation

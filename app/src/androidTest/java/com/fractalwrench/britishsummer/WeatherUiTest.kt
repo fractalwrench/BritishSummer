@@ -65,7 +65,7 @@ class WeatherUiTest {
     @Before
     fun setUp() {
         val activity = activityRule.activity
-        weatherData = loadCurrentWeather()
+        weatherData = JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
 
         activity.runOnUiThread {
             activity.setFragment(fragment)
@@ -74,9 +74,9 @@ class WeatherUiTest {
         }
     }
 
-    // Test type 1: ensure that the view displays state changes correctly when the viewmodel
-    // is updated
-
+    /**
+     * Ensures that the view displays state changes when the viewmodel's live data is updated.
+     */
     @Test
     fun showsContent() {
         activityRule.activity.runOnUiThread {
@@ -84,14 +84,15 @@ class WeatherUiTest {
         }
 
         onView(withId(R.id.location_title))
-                .check(matches(withText(weatherData.name)))
+            .check(matches(withText(weatherData.name)))
 
         // TODO add checks for other fields and other states
     }
 
-    // Test type 2: ensure that the view reacts to user input by sending a message to the ViewModel.
-    // This is verified with a fake repository
-
+    /**
+     * Ensure that the view reacts to user input by sending a message to the ViewModel.
+     * This is verified with a fake repository
+     */
     @Test
     fun requestsCityWeather() {
         TimeScheduler.timeSchedulerHandler = { default, tag ->
@@ -99,14 +100,11 @@ class WeatherUiTest {
         }
 
         onView(withId(R.id.city_field))
-                .perform(typeText("some query"), closeSoftKeyboard())
-                .perform(pressImeActionButton())
+            .perform(typeText("some query"), closeSoftKeyboard())
+            .perform(pressImeActionButton())
 
         onView(withId(R.id.location_title))
-                .check(matches(withText("London")))
+            .check(matches(withText("London")))
     }
 
-    fun loadCurrentWeather(): CurrentWeather {
-        return JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
-    }
 }

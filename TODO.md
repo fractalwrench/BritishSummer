@@ -1,5 +1,9 @@
 ## In progress
 
+- Tidy up timehandler
+- Tidy up instrumentation test DI
+- Test ProGuard
+- Test etags/cache
 - Add 5 day weather forecast
 
 ## Backlog
@@ -11,7 +15,6 @@
 - Tidy up source files
 - Disable animations automatically with Espresso
 - Dex/APK size count (blocked, broken on Android 8.0)
-- Test ProGuard
 
 ## Targets
 - Regular app
