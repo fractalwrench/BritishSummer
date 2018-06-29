@@ -4,7 +4,7 @@ import android.app.Application
 import androidModule
 import com.bugsnag.android.Bugsnag
 import com.fractalwrench.britishsummer.log.generateLogModule
-import dataModule
+import com.fractalwrench.britishsummer.weather.weatherModule
 import org.koin.android.ext.android.startKoin
 
 class MainApplication : Application() {
@@ -18,7 +18,7 @@ class MainApplication : Application() {
         val apiKey = getString(R.string.weather_api_key)
         val networkModule = generateNetworkModule(baseUrl, apiKey)
         val logModule = generateLogModule(client)
-        val modules = listOf(androidModule, dataModule, networkModule, viewModelModule, logModule)
+        val modules = listOf(androidModule, weatherModule, networkModule, logModule)
         startKoin(this, modules)
     }
 }

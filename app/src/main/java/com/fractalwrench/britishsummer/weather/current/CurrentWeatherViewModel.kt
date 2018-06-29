@@ -1,14 +1,14 @@
-package com.fractalwrench.britishsummer.ui.main
+package com.fractalwrench.britishsummer.weather.current
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.fractalwrench.britishsummer.CurrentWeather
-import com.fractalwrench.britishsummer.CurrentWeatherRepository
+import com.fractalwrench.britishsummer.weather.CurrentWeather
+import com.fractalwrench.britishsummer.weather.WeatherRepository
 import com.fractalwrench.britishsummer.UIState
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
-class CurrentWeatherViewModel(private val repository: CurrentWeatherRepository) : ViewModel() {
+class CurrentWeatherViewModel(private val repository: WeatherRepository) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
     val weather: MutableLiveData<UIState<CurrentWeather>> = MutableLiveData()
@@ -19,12 +19,6 @@ class CurrentWeatherViewModel(private val repository: CurrentWeatherRepository) 
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe { weather.value = UIState.Content(it) }
         )
-
-//        repository.getWeatherForecast(cityName)
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe {
-//                    it.toString()
-//                }
     }
 
     override fun onCleared() {

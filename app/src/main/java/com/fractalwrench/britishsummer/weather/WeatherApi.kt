@@ -1,4 +1,4 @@
-package com.fractalwrench.britishsummer
+package com.fractalwrench.britishsummer.weather
 
 import io.reactivex.Observable
 import retrofit2.http.GET

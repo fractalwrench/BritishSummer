@@ -10,8 +10,12 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.fractalwrench.britishsummer.log.Logger
-import com.fractalwrench.britishsummer.ui.main.CurrentWeatherViewModel
-import com.fractalwrench.britishsummer.ui.main.MainFragment
+import com.fractalwrench.britishsummer.weather.CurrentWeather
+import com.fractalwrench.britishsummer.weather.Forecast
+import com.fractalwrench.britishsummer.weather.current.CurrentWeatherViewModel
+import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
+import com.fractalwrench.britishsummer.weather.WeatherApi
+import com.fractalwrench.britishsummer.weather.WeatherRepository
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Rule
@@ -35,7 +39,7 @@ class WeatherUiTest {
 
             val testDoubleModule = module {
                 viewModel { CurrentWeatherViewModel(get()) }
-                single { CurrentWeatherRepository(get()) }
+                single { WeatherRepository(get()) }
                 single {
                     val weatherApi: WeatherApi = object : WeatherApi {
                         override fun getWeatherForecast(cityName: String): Observable<Forecast> {
@@ -55,7 +59,7 @@ class WeatherUiTest {
     }
 
     private lateinit var weatherData: CurrentWeather
-    private val fragment = MainFragment()
+    private val fragment = CurrentWeatherFragment()
     private lateinit var weatherModel: CurrentWeatherViewModel
 
     @Before

@@ -1,9 +1,9 @@
-package com.fractalwrench.britishsummer
+package com.fractalwrench.britishsummer.weather
 
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 
-class CurrentWeatherRepository(private val weatherApi: WeatherApi) {
+class WeatherRepository(private val weatherApi: WeatherApi) {
 
     fun getCurrentWeather(cityName: String): Flowable<CurrentWeather> {
         return weatherApi.getCurrentWeather(cityName).toFlowable(BackpressureStrategy.BUFFER)

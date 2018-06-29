@@ -1,6 +1,7 @@
 package com.fractalwrench.britishsummer
 
 import android.content.Context
+import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import io.reactivex.schedulers.Schedulers
@@ -15,7 +16,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.Date
 
-fun generateNetworkModule(baseUrl: String, weatherApiKey: String): Module {
+internal fun generateNetworkModule(baseUrl: String, weatherApiKey: String): Module {
     return module {
         single { retrofit(get(), get(), baseUrl) }
         single { cache(get()) }
@@ -27,41 +28,41 @@ fun generateNetworkModule(baseUrl: String, weatherApiKey: String): Module {
     }
 }
 
-fun moshi(): Moshi {
+internal fun moshi(): Moshi {
     return Moshi.Builder()
             .add(Date::class.java, Rfc3339DateJsonAdapter())
             .build()
 }
 
-fun converterFactory(moshi: Moshi): Converter.Factory {
-    return MoshiConverterFactory.create(moshi)
-}
-
-fun interceptor(weatherApiKey: String): Interceptor { // TODO test me
+internal fun interceptor(weatherApiKey: String): Interceptor {
     return Interceptor {
         val request = it.request()
         val adaptedUrl = request.url().newBuilder()
-                .addQueryParameter("appid", weatherApiKey)
-                .addQueryParameter("units", "metric")
-                .build()
+            .addQueryParameter("appid", weatherApiKey)
+            .addQueryParameter("units", "metric")
+            .build()
 
         val adaptedRequest = request.newBuilder().url(adaptedUrl).build()
         it.proceed(adaptedRequest)
     }
 }
 
-fun cache(context: Context): Cache {
+private fun converterFactory(moshi: Moshi): Converter.Factory {
+    return MoshiConverterFactory.create(moshi)
+}
+
+private fun cache(context: Context): Cache {
     return Cache(context.cacheDir, 16 * 1024 * 1024)
 }
 
-fun okHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient {
+private fun okHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient {
     return OkHttpClient.Builder()
             .cache(cache)
             .addInterceptor(interceptor)
             .build()
 }
 
-fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory, baseUrl: String): Retrofit {
+private fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory, baseUrl: String): Retrofit {
     return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(httpClient)
@@ -70,6 +71,6 @@ fun retrofit(httpClient: OkHttpClient, converterFactory: Converter.Factory, base
             .build()
 }
 
-fun weatherApi(retrofit: Retrofit): WeatherApi {
+private fun weatherApi(retrofit: Retrofit): WeatherApi {
     return retrofit.create(WeatherApi::class.java)
 }

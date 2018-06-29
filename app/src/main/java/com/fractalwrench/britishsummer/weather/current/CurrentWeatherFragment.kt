@@ -1,13 +1,12 @@
-package com.fractalwrench.britishsummer.ui.main
+package com.fractalwrench.britishsummer.weather.current
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
-import com.fractalwrench.britishsummer.CurrentWeather
+import com.fractalwrench.britishsummer.weather.CurrentWeather
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.debounceUi
@@ -27,10 +26,10 @@ import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
 import java.util.Date
 
-class MainFragment : Fragment() {
+class CurrentWeatherFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = CurrentWeatherFragment()
     }
 
     internal val weatherModel: CurrentWeatherViewModel by viewModel()

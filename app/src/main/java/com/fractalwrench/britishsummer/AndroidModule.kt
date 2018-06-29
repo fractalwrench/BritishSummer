@@ -1,5 +1,5 @@
 import org.koin.dsl.module.module
 
-val androidModule = module {
+internal val androidModule = module {
     single { this }
 }
