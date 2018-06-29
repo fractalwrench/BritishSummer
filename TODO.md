@@ -1,8 +1,6 @@
 ## In progress
 
-- Ensure that everything is serialised properly, add inline docs for fields
 - Add 5 day weather forecast
-
 
 ## Backlog
 - Get location (with permission check, degrade to graceful behaviour)
@@ -10,9 +8,7 @@
 - Inject schedulers
 - Organise gradle deps and separate version
 - Create packages by feature
-- Parameterised Unit Tests to test unusual data
 - Tidy up source files
-- Document source files unlikely to change
 - Disable animations automatically with Espresso
 - Dex/APK size count (blocked, broken on Android 8.0)
 - Test ProGuard
@@ -48,3 +44,4 @@
 - Fix ./gradlew check not running tests
 - Test common (for resources, other shared things)
 - Request in metric
+- Ensure that everything is serialised properly, add inline docs for fields

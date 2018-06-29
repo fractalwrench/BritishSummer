@@ -1,55 +1,73 @@
 package com.fractalwrench.britishsummer
 
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-// TODO how to handle nullable values? The API does not guarantee data.
-
+/**
+ * Represents the current weather in a given location
+ */
 @JsonClass(generateAdapter = true)
 data class CurrentWeather(
 
     /**
      * The clouds at the current location
      */
-    val clouds: Clouds,
+    val clouds: Clouds?,
 
     /**
      * The GPS coordinates of the current location
      */
-    val coord: Coord,
+    val coord: Coord?,
 
     /**
      * Time of data calculation, unix, UTC
      */
-    val dt: Long,
+    val dt: Long?,
 
     /**
      * The settlement's ID
      */
-    val id: Long,
+    val id: Long?,
 
-    // TODO
-    val main: Main,
+    /**
+     * Represents the main weather information (temperature, pressure, etc)
+     */
+    val main: Main?,
 
     /**
      * The settlement's name
      */
-    val name: String,
+    val name: String?,
 
-    // TODO
-    val sys: Sys,
+    /**
+     * Country code/sunrise information
+     */
+    val sys: Sys?,
 
     /**
      * The visibility in metres
      */
     val visibility: Int?,
 
-    // TODO
-    val weather: Array<Weather>,
+    /**
+     * The weather conditions
+     */
+    val weather: Array<Weather>?,
 
     /**
      * The wind at the current location
      */
-    val wind: Wind
+    val wind: Wind?,
+
+    /**
+     * The volume of rain in the near-past
+     */
+    val rain: Precipitation?,
+
+    /**
+     * The volume of snow in the near-past
+     */
+    val snow: Precipitation?
 )
 
 /**
@@ -61,7 +79,7 @@ data class Clouds(
     /**
      * Cloudiness, as a percentage
      */
-    val all: Double
+    val all: Double?
 )
 
 /**
@@ -73,35 +91,76 @@ data class Coord(
     /**
      * City geo location, latitude
      */
-    val lat: Double,
+    val lat: Double?,
 
     /**
      * City geo location, longitude
      */
-    val lon: Double
+    val lon: Double?
 )
 
-// TODO
+/**
+ * Represents the main weather information (temperature, pressure, etc)
+ */
 @JsonClass(generateAdapter = true)
 data class Main(
+
+    /**
+     * Atmospheric pressure on the ground level, hPa
+     */
     val grnd_level: Double?,
-    val humidity: Double,
-    val pressure: Double,
+
+    /**
+     * Humidity, %
+     */
+    val humidity: Double?,
+
+    /**
+     * Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
+     */
+    val pressure: Double?,
+
+    /**
+     * Atmospheric pressure on the sea level, hPa
+     */
     val sea_level: Double?,
-    val temp: Double,
-    val temp_max: Double,
-    val temp_min: Double
+
+    /**
+     * Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+     */
+    val temp: Double?,
+
+    /**
+     * Maximum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+     */
+    val temp_max: Double?,
+
+    /**
+     * Minimum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
+     */
+    val temp_min: Double?
 )
 
-// TODO
+/**
+ * Country code/sunrise information
+ */
 @JsonClass(generateAdapter = true)
 data class Sys(
-    val country: String,
-    val id: Long,
-    val message: Double,
-    val sunrise: Long,
-    val sunset: Long,
-    val type: Int
+
+    /**
+     * Country code (GB, JP etc.)
+     */
+    val country: String?,
+
+    /**
+     * Sunrise time, unix, UTC
+     */
+    val sunrise: Long?,
+
+    /**
+     * Sunset time, unix, UTC
+     */
+    val sunset: Long?
 )
 
 /**
@@ -118,98 +177,140 @@ data class Wind(
     /**
      * Wind speed. Unit Default: meter/sec, Metric: meter/sec, Imperial: miles/hour.
      */
-    val speed: Double
+    val speed: Double?
 )
 
-// TODO
+/**
+ * Represents a weather condition. See https://openweathermap.org/weather-conditions
+ */
 @JsonClass(generateAdapter = true)
 data class Weather(
-    val description: String,
-    val icon: String,
-    val id: Long,
-    val main: String
+
+    /**
+     * Weather condition within the group
+     */
+    val description: String?,
+
+    /**
+     * Weather icon id
+     */
+    val icon: String?,
+
+    /**
+     * Weather condition id
+     */
+    val id: Long?,
+
+    /**
+     * Group of weather parameters (Rain, Snow, Extreme etc.)
+     */
+    val main: String?
 )
 
-// TODO deal with remaining
-
-//weather (more info Weather condition codes)
-//weather.id Weather condition id
-//weather.main Group of weather parameters (Rain, Snow, Extreme etc.)
-//weather.description Weather condition within the group
-//weather.icon Weather icon id
-//main
-//main.temp Temperature. Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-//main.pressure Atmospheric pressure (on the sea level, if there is no sea_level or grnd_level data), hPa
-//main.humidity Humidity, %
-//main.temp_min Minimum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-//main.temp_max Maximum temperature at the moment. This is deviation from current temp that is possible for large cities and megalopolises geographically expanded (use these parameter optionally). Unit Default: Kelvin, Metric: Celsius, Imperial: Fahrenheit.
-//main.sea_level Atmospheric pressure on the sea level, hPa
-//main.grnd_level Atmospheric pressure on the ground level, hPa
-//rain
-//rain.3h Rain volume for the last 3 hours
-//snow
-//snow.3h Snow volume for the last 3 hours
-//sys
-//sys.country Country code (GB, JP etc.)
-//sys.sunrise Sunrise time, unix, UTC
-//sys.sunset Sunset time, unix, UTC
-
+/**
+ * Represents future weather forecasts for a given settlement
+ */
 @JsonClass(generateAdapter = true)
 data class Forecast(
 
     /**
      * The settlement to which the weather forecast applies
      */
-    val city: City,
+    val city: City?,
 
     /**
      * The number of lines returned by this API call
      */
-    val cnt: Int,
+    val cnt: Int?,
 
     /**
      * The list of forecasts
      */
-    val list: Array<List>
+    val list: Array<List>?
 )
 
+/**
+ * Represents information on a given settlement
+ */
 @JsonClass(generateAdapter = true)
 data class City(
 
     /**
      * The GPS coordinates for the given settlement
      */
-    val coord: Coord,
+    val coord: Coord?,
 
     /**
      * The country which contains the settlement
      */
-    val country: String,
+    val country: String?,
 
     /**
      * The settlement's weather ID
      */
-    val id: Long,
+    val id: Long?,
 
     /**
      * The name of the settlement
      */
-    val name: String
+    val name: String?
 )
 
-// TODO
+/**
+ * The list of weather forecasts
+ */
 @JsonClass(generateAdapter = true)
 data class List(
-    val clouds: Clouds,
-    val dt: Long,
-    val dt_txt: String,
-    val main: Main,
-//        val rain: Clouds,
-//        val sys: Clouds,
-    val weather: Array<Weather>,
-    val wind: Wind
+
+    /**
+     * The clouds at the current location
+     */
+    val clouds: Clouds?,
+
+    /**
+     * Time of data calculation, unix, UTC
+     */
+    val dt: Long?,
+
+    /**
+     * Represents the main weather information (temperature, pressure, etc)
+     */
+    val main: Main?,
+
+    /**
+     * The weather conditions
+     */
+    val weather: Array<Weather>?,
+
+    /**
+     * Country code/sunrise information
+     */
+    val sys: Sys?,
+
+    /**
+     * The wind at the current location
+     */
+    val wind: Wind?,
+
+    /**
+     * The volume of rain in the near-past
+     */
+    val rain: Precipitation?,
+
+    /**
+     * The volume of snow in the near-past
+     */
+    val snow: Precipitation?
 )
 
-// TODO rain + snow, check schema vs docs
+/**
+ * Represents near-past precipitation
+ */
+data class Precipitation(
 
-
+    /**
+     * The volume of precipitation over 3 hours
+     */
+    @field:Json(name = "3h")
+    val _3h: Double?
+)

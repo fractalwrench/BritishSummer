@@ -20,21 +20,43 @@ class CurrentWeatherTest {
             assertEquals(2643743, id)
             assertEquals("London", name)
             assertEquals(10000, visibility)
-            // TODO others
         }
 
-
-        with(data.coord) {
+        with(data.coord!!) {
             assertEquals(51.51, lat)
             assertEquals(-0.13, lon)
         }
-        with(data.wind) {
+        with(data.wind!!) {
             assertEquals(4.1, speed)
             assertEquals(80.0, deg)
         }
 
-        assertEquals(90.0, data.clouds.all)
+        assertEquals(90.0, data.clouds!!.all)
 
+        with (data.main!!) {
+            assertEquals(280.32, temp)
+            assertEquals(1012.0, pressure)
+            assertEquals(81.0, humidity)
+            assertEquals(279.15, temp_min)
+            assertEquals(281.15, temp_max)
+        }
+
+        with (data.sys!!) {
+            assertEquals("GB", country)
+            assertEquals(1485762037, sunrise)
+            assertEquals(1485794875, sunset)
+        }
+
+        assertEquals(1, data.weather!!.size)
+        val weather = data.weather!![0]
+
+        assertEquals(300, weather.id)
+        assertEquals("Drizzle", weather.main)
+        assertEquals("light intensity drizzle", weather.description)
+        assertEquals("09d", weather.icon)
+
+        assertEquals(3.0, data.rain?._3h)
+        assertEquals(3.0, data.snow?._3h)
     }
 
 }

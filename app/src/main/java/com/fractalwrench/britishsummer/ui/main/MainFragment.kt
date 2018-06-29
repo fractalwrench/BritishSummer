@@ -1,5 +1,6 @@
 package com.fractalwrench.britishsummer.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -82,10 +83,10 @@ class MainFragment : Fragment() {
 
     private fun showViewData(weather: CurrentWeather) {
         location_title.text = weather.name
-        weather_desc.text = weather.weather[0].description // fixme check length
-        temp_desc.text = "Current: ${weather.main.temp}, Min: ${weather.main.temp_min}, Max: ${weather.main.temp_max}"
-        solar_desc.text = "Sunrise: ${Date(weather.sys.sunrise)}, Sunset: ${Date(weather.sys.sunset)}"
-        wind_desc.text = "Wind speed: ${weather.wind.speed}, Direction: ${weather.wind.deg}"
-        humidity_desc.text = "Humidity: ${weather.main.humidity}%"
+        weather_desc.text = weather.weather?.get(0)?.description // fixme check length
+        temp_desc.text = "Current: ${weather.main?.temp}, Min: ${weather.main?.temp_min}, Max: ${weather.main?.temp_max}"
+        solar_desc.text = "Sunrise: ${Date(weather.sys?.sunrise!!)}, Sunset: ${Date(weather.sys.sunset!!)}"
+        wind_desc.text = "Wind speed: ${weather.wind?.speed}, Direction: ${weather.wind?.deg}"
+        humidity_desc.text = "Humidity: ${weather.main?.humidity}%"
     }
 }
