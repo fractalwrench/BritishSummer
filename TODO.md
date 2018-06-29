@@ -1,14 +1,13 @@
 ## In progress
 
 - Tidy up timehandler
-- Tidy up instrumentation test DI
-- Test etags/cache
 - Add 5 day weather forecast screen
 
 ## Backlog
 - Get location (with permission check, degrade to graceful behaviour)
 - Save most recent/multiple locations (way in the future)
 - Inject schedulers
+- Test etags/cache
 
 ## Targets
 - Regular app
@@ -43,4 +42,5 @@
 - Request in metric
 - Ensure that everything is serialised properly, add inline docs for fields
 - Create packages by feature
+- Tidy up instrumentation test DI
 

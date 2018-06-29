@@ -27,36 +27,7 @@ import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 
 @RunWith(AndroidJUnit4::class)
-class WeatherUiTest {
-
-    @Rule
-    @JvmField
-    val activityRule = object : ActivityTestRule<SingleFragmentActivity>(SingleFragmentActivity::class.java, true, true) {
-        override fun beforeActivityLaunched() {
-            super.beforeActivityLaunched()
-
-            // TODO abstract all this DI
-
-            val testDoubleModule = module {
-                viewModel { CurrentWeatherViewModel(get()) }
-                single { WeatherRepository(get()) }
-                single {
-                    val weatherApi: WeatherApi = object : WeatherApi {
-                        override fun getWeatherForecast(cityName: String): Observable<Forecast> {
-                            TODO("not implemented") // To change body of created functions use File | Settings | File Templates.
-                        }
-
-                        override fun getCurrentWeather(cityName: String): Observable<CurrentWeather> {
-                            return Observable.just(weatherData)
-                        }
-                    }
-                    weatherApi
-                }
-                single { Logger(arrayOf()) }
-            }
-            loadKoinModules(listOf(testDoubleModule))
-        }
-    }
+class WeatherUiTest : FragmentUiTest() {
 
     private lateinit var weatherData: CurrentWeather
     private val fragment = CurrentWeatherFragment()
@@ -64,14 +35,27 @@ class WeatherUiTest {
 
     @Before
     fun setUp() {
-        val activity = activityRule.activity
         weatherData = JsonResourceReader().readJsonResource("/current_weather.json", CurrentWeather::class.java)
+        addFragmentToSingleActivity(fragment)
 
-        activity.runOnUiThread {
-            activity.setFragment(fragment)
-            activity.supportFragmentManager.executePendingTransactions()
+        activityRule.activity.runOnUiThread {
             weatherModel = fragment.weatherModel
         }
+    }
+
+    override fun inject() {
+        val weatherApi: WeatherApi = object : WeatherApi {
+            override fun getWeatherForecast(cityName: String) = TODO()
+            override fun getCurrentWeather(cityName: String) = Observable.just(weatherData)
+        }
+
+        val testDoubleModule = module {
+            viewModel { CurrentWeatherViewModel(get()) }
+            single { WeatherRepository(get()) }
+            single { weatherApi }
+            single { Logger(arrayOf()) }
+        }
+        loadKoinModules(listOf(testDoubleModule))
     }
 
     /**
