@@ -6,6 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/city_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:hint="@string/city_field_hint"
+        android:imeOptions="actionDone"
+        android:padding="16dp"
+        android:singleLine="true"
+        android:text="bath"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ViewFlipper
         android:id="@+id/weather_view_flipper"
         android:layout_width="match_parent"
@@ -26,19 +40,7 @@
             tools:context=".weather.forecast.ForecastFragment">
 
 
-            <EditText
-                android:id="@+id/city_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:gravity="center"
-                android:hint="@string/city_field_hint"
-                android:imeOptions="actionDone"
-                android:padding="16dp"
-                android:singleLine="true"
-                android:text="bath"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+
 
             <TextView
                 android:id="@+id/location_title"

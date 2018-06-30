@@ -7,6 +7,6 @@ import org.koin.dsl.module.module
 
 internal val weatherModule = module {
     bean { WeatherRepository(get()) }
-    viewModel { CurrentWeatherViewModel(get(), get("ui")) }
+    viewModel { CurrentWeatherViewModel(get(), get("ui"), get()) }
     viewModel { ForecastViewModel(get(), get("ui"), get()) }
 }
