@@ -39,11 +39,12 @@ class ForecastFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.init()
 
         compositeDisposable?.add(
             RxTextView.editorActions(city_field)
                 .filter { it == EditorInfo.IME_ACTION_DONE }
-                .debounce(1000, TimeUnit.MILLISECONDS, scheduler)
+//                .debounce(1000, TimeUnit.MILLISECONDS, scheduler)
                 .forEach { handleNewLocation() }
         )
 
