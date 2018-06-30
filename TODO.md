@@ -9,6 +9,7 @@
 - Handle error, progress, placeholder conditions
 - Handle scrolling of screen
 - Weather map layers? https://openweathermap.org/api/weathermaps
+- Pull to refresh
 
 ## Targets
 - Regular app

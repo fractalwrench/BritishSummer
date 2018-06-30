@@ -4,87 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".weather.forecast.ForecastFragment">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/city_field"
+    <ViewFlipper
+        android:id="@+id/weather_view_flipper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:hint="@string/city_field_hint"
-        android:imeOptions="actionDone"
-        android:padding="16dp"
-        android:singleLine="true"
-        android:text="bath"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/location_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity=""
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/city_field"
-        tools:text="London" />
+        <ProgressBar
+            android:id="@+id/weather_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
-    <TextView
-        android:id="@+id/weather_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity=""
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location_title"
-        tools:text="Light drizzle, as per usual" />
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/weather_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".weather.forecast.ForecastFragment">
 
-    <TextView
-        android:id="@+id/temp_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity=""
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/weather_desc"
-        tools:text="Current: 16C, Min: 8C, Max: 22C" />
 
-    <TextView
-        android:id="@+id/solar_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity=""
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/temp_desc"
-        tools:text="Sunrise: 6:05am, Sunset: 19:55pm" />
+            <EditText
+                android:id="@+id/city_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:hint="@string/city_field_hint"
+                android:imeOptions="actionDone"
+                android:padding="16dp"
+                android:singleLine="true"
+                android:text="bath"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/wind_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity=""
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/solar_desc"
-        tools:text="Wind speed: 34, Direction: SSE" />
+            <TextView
+                android:id="@+id/location_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/city_field"
+                tools:text="London" />
 
-    <TextView
-        android:id="@+id/humidity_desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity=""
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wind_desc"
-        tools:text="Humidity: 85%" />
+            <TextView
+                android:id="@+id/weather_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/location_title"
+                tools:text="Light drizzle, as per usual" />
+
+            <TextView
+                android:id="@+id/temp_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/weather_desc"
+                tools:text="Current: 16C, Min: 8C, Max: 22C" />
+
+            <TextView
+                android:id="@+id/solar_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_desc"
+                tools:text="Sunrise: 6:05am, Sunset: 19:55pm" />
+
+            <TextView
+                android:id="@+id/wind_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/solar_desc"
+                tools:text="Wind speed: 34, Direction: SSE" />
+
+            <TextView
+                android:id="@+id/humidity_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity=""
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/wind_desc"
+                tools:text="Humidity: 85%" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/weather_error"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/forecast_error" />
+
+        <TextView
+            android:id="@+id/weather_placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/forecast_placeholder" />
+
+    </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

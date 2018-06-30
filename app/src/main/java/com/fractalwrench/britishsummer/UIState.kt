@@ -1,5 +1,7 @@
 package com.fractalwrench.britishsummer
 
+import com.fractalwrench.britishsummer.weather.ViewPosition
+
 /**
  * Represents 4 possible states of UI - content, error, progress, and placeholder
  */
@@ -24,4 +26,13 @@ sealed class UIState<T> {
      * The UI should display a placeholder as the content cannot be loaded without user interaction
      */
     class Placeholder<T> : UIState<T>()
+}
+
+internal fun UIState<*>.toViewPosition(): ViewPosition {
+    return when (this) {
+        is UIState.Content -> ViewPosition.CONTENT
+        is UIState.Error -> ViewPosition.ERROR
+        is UIState.Progress -> ViewPosition.PROGRESS
+        is UIState.Placeholder -> ViewPosition.PLACEHOLDER
+    }
 }

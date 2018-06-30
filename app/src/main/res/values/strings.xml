@@ -2,4 +2,6 @@
     <string name="app_name">BritishSummer</string>
     <string name="city_field_hint">Enter your city</string>
     <string name="weather_api_url">https://api.openweathermap.org/data/2.5/</string>
+    <string name="forecast_placeholder">Please enter your location to view weather information</string>
+    <string name="forecast_error">Unable to fetch weather information - please try again.</string>
 </resources>

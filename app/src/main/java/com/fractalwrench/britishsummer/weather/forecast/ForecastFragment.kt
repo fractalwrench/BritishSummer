@@ -9,13 +9,16 @@ import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
+import com.fractalwrench.britishsummer.toViewPosition
 import com.fractalwrench.britishsummer.weather.Forecast
+import com.fractalwrench.britishsummer.weather.ViewPosition
 import com.fractalwrench.britishsummer.weather.WeatherPrediction
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.current_weather_fragment.city_field
 import kotlinx.android.synthetic.main.current_weather_fragment.location_title
-import kotlinx.android.synthetic.main.forecast_fragment.recycler_view
+import kotlinx.android.synthetic.main.forecast_fragment.forecast_content
+import kotlinx.android.synthetic.main.forecast_fragment.forecast_view_flipper
 import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
 import java.util.concurrent.TimeUnit
@@ -46,7 +49,7 @@ class ForecastFragment : BaseFragment() {
 
         weatherAdapter = ForecastAdapter(forecastList)
 
-        recycler_view.apply {
+        forecast_content.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = weatherAdapter
@@ -65,20 +68,23 @@ class ForecastFragment : BaseFragment() {
         context?.hideKeyboard(city_field)
     }
 
-    private fun bindWeatherUiState(it: UIState<Forecast>?) {
+    private fun bindWeatherUiState(it: UIState<Forecast>) {
+        updateDisplayedView(it.toViewPosition())
+
         when (it) {
-            is UIState.Error -> TODO()
-            is UIState.Progress -> TODO()
-            is UIState.Placeholder -> TODO()
             is UIState.Content -> showViewData(it.data)
         }
     }
 
+    private fun updateDisplayedView(position: ViewPosition) {
+        forecast_view_flipper.displayedChild = position.pos
+    }
+
     private fun showViewData(forecast: Forecast) {
+        updateDisplayedView(ViewPosition.CONTENT)
         forecastList.clear()
         forecastList.addAll(forecast.list as Array<WeatherPrediction>)
         weatherAdapter.notifyDataSetChanged()
-        location_title.text = forecast.city?.name
     }
 }
 

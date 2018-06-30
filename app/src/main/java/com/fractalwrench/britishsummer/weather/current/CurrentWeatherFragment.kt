@@ -10,6 +10,8 @@ import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.convertFromUnixToJavaEpoch
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
+import com.fractalwrench.britishsummer.toViewPosition
+import com.fractalwrench.britishsummer.weather.ViewPosition
 import com.fractalwrench.britishsummer.weather.forecast.ForecastFragment
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Scheduler
@@ -19,7 +21,9 @@ import kotlinx.android.synthetic.main.current_weather_fragment.location_title
 import kotlinx.android.synthetic.main.current_weather_fragment.solar_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.temp_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.weather_desc
+import kotlinx.android.synthetic.main.current_weather_fragment.weather_view_flipper
 import kotlinx.android.synthetic.main.current_weather_fragment.wind_desc
+import kotlinx.android.synthetic.main.forecast_fragment.forecast_view_flipper
 import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
 import java.util.Date
@@ -58,16 +62,21 @@ class CurrentWeatherFragment : BaseFragment() {
         context?.hideKeyboard(city_field)
     }
 
-    private fun bindWeatherUiState(it: UIState<CurrentWeather>?) {
+    private fun bindWeatherUiState(it: UIState<CurrentWeather>) {
+        updateDisplayedView(it.toViewPosition())
+
         when (it) {
-            is UIState.Error -> TODO()
-            is UIState.Progress -> TODO()
-            is UIState.Placeholder -> TODO()
             is UIState.Content -> showViewData(it.data)
+            else -> updateDisplayedView(it.toViewPosition())
         }
     }
 
+    private fun updateDisplayedView(position: ViewPosition) {
+        weather_view_flipper.displayedChild = position.pos
+    }
+
     private fun showViewData(weather: CurrentWeather) {
+        updateDisplayedView(ViewPosition.CONTENT)
         location_title.text = weather.name
         weather_desc.text = weather.weather?.get(0)?.description // fixme check length
         temp_desc.text = "Current: ${weather.main?.temp}, Min: ${weather.main?.temp_min}, Max: ${weather.main?.temp_max}"

@@ -5,10 +5,12 @@ import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
 import androidx.test.espresso.action.ViewActions.pressImeActionButton
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
 import com.fractalwrench.britishsummer.weather.CurrentWeather
+import com.fractalwrench.britishsummer.weather.Forecast
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.fractalwrench.britishsummer.weather.WeatherRepository
 import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
@@ -23,11 +25,15 @@ import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 
 @RunWith(AndroidJUnit4::class)
-class CurrentWeatherFragmentTest : FragmentUiTest() {
+class CurrentWeatherFragmentTest : FragmentUiTest<CurrentWeather>() {
 
     private lateinit var content: CurrentWeather
     private val fragment = CurrentWeatherFragment.newInstance()
-    private lateinit var weatherModel: CurrentWeatherViewModel
+    private lateinit var viewModel: CurrentWeatherViewModel
+
+    override val progressId = R.id.weather_progress
+    override val errorId = R.id.weather_error
+    override val placeholderId = R.id.weather_placeholder
 
     @Before
     fun setUp() {
@@ -35,7 +41,7 @@ class CurrentWeatherFragmentTest : FragmentUiTest() {
         addFragmentToSingleActivity(fragment)
 
         activityRule.activity.runOnUiThread {
-            weatherModel = fragment.viewModel
+            viewModel = fragment.viewModel
         }
     }
 
@@ -58,14 +64,19 @@ class CurrentWeatherFragmentTest : FragmentUiTest() {
      */
     @Test
     fun showsContent() {
-        activityRule.activity.runOnUiThread {
-            weatherModel.weather.value = UIState.Content(content)
-        }
+        updateUiState(UIState.Content(content))
+
+        onView(withId(R.id.weather_content))
+            .check(matches(ViewMatchers.isDisplayed()))
 
         onView(withId(R.id.location_title))
             .check(matches(withText(content.name)))
+    }
 
-        // TODO add checks for other fields and other states
+    override fun updateUiState(content: UIState<CurrentWeather>) {
+        activityRule.activity.runOnUiThread {
+            viewModel.weather.value = content
+        }
     }
 
     /**
