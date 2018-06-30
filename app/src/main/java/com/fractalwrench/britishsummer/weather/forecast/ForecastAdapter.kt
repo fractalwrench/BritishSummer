@@ -5,14 +5,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fractalwrench.britishsummer.R
+import com.fractalwrench.britishsummer.convertFromUnixToJavaEpoch
+import com.fractalwrench.britishsummer.weather.WeatherPrediction
+import java.util.Date
 
-class WeatherForecastAdapter(private val dataset: Array<String>)
-    : RecyclerView.Adapter<WeatherForecastAdapter.ViewHolder>() {
+class ForecastAdapter(private val dataset: List<WeatherPrediction>)
+    : RecyclerView.Adapter<ForecastAdapter.ViewHolder>() {
 
     class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 
     override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): WeatherForecastAdapter.ViewHolder {
+                                    viewType: Int): ForecastAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.forecast_view, parent, false)
 
@@ -21,7 +24,8 @@ class WeatherForecastAdapter(private val dataset: Array<String>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = dataset[position]
+        val data = dataset[position]
+        holder.textView.text = Date(data.dt!!.convertFromUnixToJavaEpoch()).toString()
     }
 
     override fun getItemCount() = dataset.size

@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.fractalwrench.britishsummer.BaseFragment
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.fractalwrench.britishsummer.weather.Forecast
+import com.fractalwrench.britishsummer.weather.WeatherPrediction
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.current_weather_fragment.city_field
@@ -28,8 +28,9 @@ class ForecastFragment : BaseFragment() {
 
     internal val scheduler: Scheduler by inject("ui")
     internal val viewModel: ForecastViewModel by viewModel()
+    private val forecastList = mutableListOf<WeatherPrediction>()
 
-    private lateinit var weatherAdapter: WeatherForecastAdapter
+    private lateinit var weatherAdapter: ForecastAdapter
 
     override val layoutId: Int = R.layout.forecast_fragment
 
@@ -43,7 +44,7 @@ class ForecastFragment : BaseFragment() {
                 .forEach { handleNewLocation() }
         )
 
-        weatherAdapter = WeatherForecastAdapter(arrayOf("foo", "bar", "whoops"))
+        weatherAdapter = ForecastAdapter(forecastList)
 
         recycler_view.apply {
             setHasFixedSize(true)
@@ -74,6 +75,9 @@ class ForecastFragment : BaseFragment() {
     }
 
     private fun showViewData(forecast: Forecast) {
+        forecastList.clear()
+        forecastList.addAll(forecast.list as Array<WeatherPrediction>)
+        weatherAdapter.notifyDataSetChanged()
         location_title.text = forecast.city?.name
     }
 }

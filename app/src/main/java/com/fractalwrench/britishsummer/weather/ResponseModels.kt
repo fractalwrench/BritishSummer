@@ -265,7 +265,7 @@ data class Forecast(
     /**
      * The list of forecasts
      */
-    val list: Array<List>?
+    val list: Array<WeatherPrediction>?
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -319,7 +319,7 @@ data class City(
  * The list of weather forecasts
  */
 @JsonClass(generateAdapter = true)
-data class List(
+data class WeatherPrediction(
 
     /**
      * The clouds at the current location
@@ -365,7 +365,7 @@ data class List(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as List
+        other as WeatherPrediction
 
         if (clouds != other.clouds) return false
         if (dt != other.dt) return false

@@ -7,6 +7,7 @@ import com.fractalwrench.britishsummer.BaseFragment
 import com.fractalwrench.britishsummer.weather.CurrentWeather
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
+import com.fractalwrench.britishsummer.convertFromUnixToJavaEpoch
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.fractalwrench.britishsummer.weather.forecast.ForecastFragment
@@ -70,7 +71,7 @@ class CurrentWeatherFragment : BaseFragment() {
         location_title.text = weather.name
         weather_desc.text = weather.weather?.get(0)?.description // fixme check length
         temp_desc.text = "Current: ${weather.main?.temp}, Min: ${weather.main?.temp_min}, Max: ${weather.main?.temp_max}"
-        solar_desc.text = "Sunrise: ${Date(weather.sys?.sunrise!!)}, Sunset: ${Date(weather.sys.sunset!!)}"
+        solar_desc.text = "Sunrise: ${Date(weather.sys?.sunrise!!.convertFromUnixToJavaEpoch())}, Sunset: ${Date(weather.sys.sunset!!.convertFromUnixToJavaEpoch())}"
         wind_desc.text = "Wind speed: ${weather.wind?.speed}, Direction: ${weather.wind?.deg}"
         humidity_desc.text = "Humidity: ${weather.main?.humidity}%"
     }
