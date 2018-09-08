@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import com.fractalwrench.britishsummer.BaseFragment
-import com.fractalwrench.britishsummer.weather.CurrentWeather
+import com.fractalwrench.britishsummer.response.CurrentWeather
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.convertFromUnixToJavaEpoch

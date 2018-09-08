@@ -10,9 +10,9 @@ import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.fractalwrench.britishsummer.toViewPosition
-import com.fractalwrench.britishsummer.weather.Forecast
+import com.fractalwrench.britishsummer.response.Forecast
 import com.fractalwrench.britishsummer.weather.ViewPosition
-import com.fractalwrench.britishsummer.weather.WeatherPrediction
+import com.fractalwrench.britishsummer.response.WeatherPrediction
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.current_weather_fragment.city_field

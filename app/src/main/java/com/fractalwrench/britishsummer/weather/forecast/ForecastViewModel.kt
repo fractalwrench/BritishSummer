@@ -6,7 +6,7 @@ import com.fractalwrench.britishsummer.weather.WeatherRepository
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.log.LogSeverity
 import com.fractalwrench.britishsummer.log.Logger
-import com.fractalwrench.britishsummer.weather.Forecast
+import com.fractalwrench.britishsummer.response.Forecast
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 

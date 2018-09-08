@@ -1,6 +1,6 @@
 package com.fractalwrench.britishsummer
 
-import com.fractalwrench.britishsummer.weather.Forecast
+import com.fractalwrench.britishsummer.response.Forecast
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test

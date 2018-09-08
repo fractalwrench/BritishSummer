@@ -1,6 +1,6 @@
 package com.fractalwrench.britishsummer
 
-import com.fractalwrench.britishsummer.weather.CurrentWeather
+import com.fractalwrench.britishsummer.response.CurrentWeather
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals

@@ -2,7 +2,7 @@ package com.fractalwrench.britishsummer.weather.current
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.fractalwrench.britishsummer.weather.CurrentWeather
+import com.fractalwrench.britishsummer.response.CurrentWeather
 import com.fractalwrench.britishsummer.weather.WeatherRepository
 import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.log.LogSeverity

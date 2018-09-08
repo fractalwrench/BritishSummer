@@ -30,3 +30,5 @@
     <fields>;
 }
 -keepnames @com.squareup.moshi.JsonClass class *
+
+-keep class com.fractalwrench.britishsummer.response.**

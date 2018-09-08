@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fractalwrench.britishsummer.R
 import com.fractalwrench.britishsummer.convertFromUnixToJavaEpoch
-import com.fractalwrench.britishsummer.weather.WeatherPrediction
+import com.fractalwrench.britishsummer.response.WeatherPrediction
 import java.util.Date
 
 class ForecastAdapter(private val dataset: List<WeatherPrediction>)

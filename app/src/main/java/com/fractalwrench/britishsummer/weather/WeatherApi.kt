@@ -1,5 +1,7 @@
 package com.fractalwrench.britishsummer.weather
 
+import com.fractalwrench.britishsummer.response.CurrentWeather
+import com.fractalwrench.britishsummer.response.Forecast
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -9,7 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
-import com.fractalwrench.britishsummer.weather.CurrentWeather
+import com.fractalwrench.britishsummer.response.CurrentWeather
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.fractalwrench.britishsummer.weather.WeatherRepository
 import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment

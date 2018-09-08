@@ -1,4 +1,4 @@
-package com.fractalwrench.britishsummer.weather
+package com.fractalwrench.britishsummer.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
