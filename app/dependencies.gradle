@@ -33,7 +33,7 @@ dependencies {
     implementation "com.bugsnag:bugsnag-android:$bugsnagVersion"
 
     implementation "org.koin:koin-android:$koinVersion"
-    implementation "org.koin:koin-androidx:$koinVersion"
+//    implementation "org.koin:koin-androidx:$koinVersion"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
