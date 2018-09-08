@@ -2,7 +2,7 @@ package com.fractalwrench.britishsummer
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
+import com.fractalwrench.britishsummer.weather.forecast.ForecastFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, CurrentWeatherFragment.newInstance())
+                    .replace(R.id.container, ForecastFragment.newInstance())
                     .commitNow()
         }
     }
