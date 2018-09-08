@@ -18,12 +18,17 @@
         android:singleLine="true"
         android:text="bath"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ViewFlipper
         android:id="@+id/weather_view_flipper"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_field">
 
         <ProgressBar
             android:id="@+id/weather_progress"
@@ -39,9 +44,6 @@
             android:layout_height="match_parent"
             tools:context=".weather.forecast.ForecastFragment">
 
-
-
-
             <TextView
                 android:id="@+id/location_title"
                 android:layout_width="match_parent"
@@ -50,7 +52,7 @@
                 android:padding="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/city_field"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="London" />
 
             <TextView
@@ -103,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:gravity=""
                 android:padding="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/wind_desc"

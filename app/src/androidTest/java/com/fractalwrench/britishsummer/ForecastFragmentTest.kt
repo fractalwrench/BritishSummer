@@ -14,13 +14,14 @@ import com.fractalwrench.britishsummer.weather.forecast.ForecastFragment
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.fractalwrench.britishsummer.weather.WeatherRepository
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers.single
 import org.junit.Before
 
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.architecture.ext.koin.viewModel
 import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 
 @RunWith(AndroidJUnit4::class)
 class ForecastFragmentTest : FragmentUiTest<Forecast>() {
@@ -50,7 +51,7 @@ class ForecastFragmentTest : FragmentUiTest<Forecast>() {
         }
 
         val testDoubleModule = module {
-            viewModel { ForecastViewModel(get(), get("ui")) }
+            viewModel { ForecastViewModel(get(), get("ui"), get()) }
             single { WeatherRepository(get()) }
             single { weatherApi }
         }
@@ -87,5 +88,4 @@ class ForecastFragmentTest : FragmentUiTest<Forecast>() {
 //        onView(withId(R.id.location_title))
 //            .check(matches(withText("Zagreb - Centar")))
     }
-
 }

@@ -14,8 +14,10 @@ class ForecastAdapter(private val dataset: List<WeatherPrediction>)
 
     class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ForecastAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ForecastAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.forecast_view, parent, false)
 

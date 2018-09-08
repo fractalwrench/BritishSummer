@@ -8,7 +8,6 @@ import com.fractalwrench.britishsummer.UIState
 import com.fractalwrench.britishsummer.log.LogSeverity
 import com.fractalwrench.britishsummer.log.Logger
 import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
 class CurrentWeatherViewModel(

@@ -3,7 +3,7 @@ package com.fractalwrench.britishsummer
 import com.fractalwrench.britishsummer.weather.ViewPosition
 import org.junit.Test
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 
 class UIStateKtTest {
 

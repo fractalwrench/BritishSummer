@@ -20,7 +20,7 @@
 - App slice
 
 # Completed!
-- Static analysis: Android Lint, KtLint (./gradlew lint check)
+- Static analysis: Android Lint, KtLint (./gradlew lint check) (./gradlew ktlint && ./gradlew ktlintFormat)
 - Obfuscation/minification: ProGuard
 - CI: Travis
 - Separate gradle files into logical sections (dependencies, etc)

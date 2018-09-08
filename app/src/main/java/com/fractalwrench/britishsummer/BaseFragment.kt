@@ -32,5 +32,4 @@ abstract class BaseFragment : Fragment() {
         compositeDisposable?.dispose()
         super.onDestroyView()
     }
-
 }

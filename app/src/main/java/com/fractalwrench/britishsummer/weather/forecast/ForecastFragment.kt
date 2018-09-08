@@ -86,5 +86,3 @@ class ForecastFragment : BaseFragment() {
         weatherAdapter.notifyDataSetChanged()
     }
 }
-
-

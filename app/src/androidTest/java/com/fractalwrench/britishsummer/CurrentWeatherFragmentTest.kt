@@ -10,7 +10,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
 import com.fractalwrench.britishsummer.weather.CurrentWeather
-import com.fractalwrench.britishsummer.weather.Forecast
 import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.fractalwrench.britishsummer.weather.WeatherRepository
 import com.fractalwrench.britishsummer.weather.current.CurrentWeatherFragment
@@ -20,7 +19,7 @@ import org.junit.Before
 
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.architecture.ext.koin.viewModel
+import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import org.koin.standalone.StandAloneContext.loadKoinModules
 
@@ -52,7 +51,7 @@ class CurrentWeatherFragmentTest : FragmentUiTest<CurrentWeather>() {
         }
 
         val testDoubleModule = module {
-            viewModel { CurrentWeatherViewModel(get(), get("ui")) }
+            viewModel { CurrentWeatherViewModel(get(), get("ui"), get()) }
             single { WeatherRepository(get()) }
             single { weatherApi }
         }
@@ -92,5 +91,4 @@ class CurrentWeatherFragmentTest : FragmentUiTest<CurrentWeather>() {
         onView(withId(R.id.location_title))
             .check(matches(withText("London")))
     }
-
 }

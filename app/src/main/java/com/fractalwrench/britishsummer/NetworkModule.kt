@@ -5,7 +5,6 @@ import com.fractalwrench.britishsummer.weather.WeatherApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import io.reactivex.Scheduler
-import io.reactivex.schedulers.Schedulers
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -67,10 +66,12 @@ private fun okHttpClient(interceptor: Interceptor, cache: Cache): OkHttpClient {
         .build()
 }
 
-private fun retrofit(httpClient: OkHttpClient,
-                     converterFactory: Converter.Factory,
-                     baseUrl: String,
-                     scheduler: Scheduler): Retrofit {
+private fun retrofit(
+    httpClient: OkHttpClient,
+    converterFactory: Converter.Factory,
+    baseUrl: String,
+    scheduler: Scheduler
+): Retrofit {
     return Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(httpClient)

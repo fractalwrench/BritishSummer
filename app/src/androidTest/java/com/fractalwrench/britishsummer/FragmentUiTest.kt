@@ -7,7 +7,6 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import com.fractalwrench.britishsummer.log.Logger
-import com.fractalwrench.britishsummer.weather.Forecast
 import io.reactivex.Scheduler
 import io.reactivex.schedulers.Schedulers
 import org.junit.Rule
@@ -15,8 +14,8 @@ import org.junit.Test
 
 import org.junit.runner.RunWith
 import org.koin.dsl.module.module
-import org.koin.standalone.StandAloneContext.closeKoin
 import org.koin.standalone.StandAloneContext.loadKoinModules
+import org.koin.standalone.StandAloneContext.stopKoin
 
 @RunWith(AndroidJUnit4::class)
 abstract class FragmentUiTest<T> {
@@ -32,13 +31,13 @@ abstract class FragmentUiTest<T> {
             super.beforeActivityLaunched()
 
             // close any previous koin contexts
-            closeKoin()
+            stopKoin()
 
             val testDoubles = module {
                 // schedulers
-                single("ui", { InstantScheduler as Scheduler })
-                single("io", { Schedulers.io() })
-                single("compute", { Schedulers.computation() })
+                single("ui") { InstantScheduler as Scheduler }
+                single("io") { Schedulers.io() }
+                single("compute") { Schedulers.computation() }
 
                 // logger
                 single { Logger(arrayOf()) }
@@ -91,5 +90,4 @@ abstract class FragmentUiTest<T> {
     }
 
     protected abstract fun updateUiState(content: UIState<T>)
-
 }
