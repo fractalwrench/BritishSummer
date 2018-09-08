@@ -12,7 +12,6 @@ import com.fractalwrench.britishsummer.hideKeyboard
 import com.fractalwrench.britishsummer.nonNullObserve
 import com.fractalwrench.britishsummer.toViewPosition
 import com.fractalwrench.britishsummer.weather.ViewPosition
-import com.fractalwrench.britishsummer.weather.forecast.ForecastFragment
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.current_weather_fragment.city_field
@@ -23,11 +22,9 @@ import kotlinx.android.synthetic.main.current_weather_fragment.temp_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.weather_desc
 import kotlinx.android.synthetic.main.current_weather_fragment.weather_view_flipper
 import kotlinx.android.synthetic.main.current_weather_fragment.wind_desc
-import kotlinx.android.synthetic.main.forecast_fragment.forecast_view_flipper
-import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
-import java.util.concurrent.TimeUnit
 
 class CurrentWeatherFragment : BaseFragment() {
 

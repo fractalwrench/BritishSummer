@@ -16,12 +16,10 @@ import com.fractalwrench.britishsummer.weather.WeatherPrediction
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Scheduler
 import kotlinx.android.synthetic.main.current_weather_fragment.city_field
-import kotlinx.android.synthetic.main.current_weather_fragment.location_title
 import kotlinx.android.synthetic.main.forecast_fragment.forecast_content
 import kotlinx.android.synthetic.main.forecast_fragment.forecast_view_flipper
-import org.koin.android.architecture.ext.android.viewModel
 import org.koin.android.ext.android.inject
-import java.util.concurrent.TimeUnit
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForecastFragment : BaseFragment() {
 
