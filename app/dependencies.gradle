@@ -1,25 +1,25 @@
 
 ext {
-    appcompatVersion = "1.0.0-alpha3"
-    androidKtxVersion = "1.0.0-alpha3"
-    lifecycleVersion = "2.0.0-alpha1"
-    constraintLayoutVersion = "1.1.2"
+    appcompatVersion = "1.0.0-rc02"
+    androidKtxVersion = "1.0.0-rc02"
+    lifecycleVersion = "2.0.0-rc01"
+    constraintLayoutVersion = "2.0.0-alpha2"
 
     koinVersion = "1.0.0-RC-2"
 
     retrofitVersion = "2.4.0"
-    timberVersion = "4.7.0"
-    bugsnagVersion = "4.5.0"
+    timberVersion = "4.7.1"
+    bugsnagVersion = "4.6.1"
 
     junitVersion = "4.12"
-    mockitoVersion = "2.19.0"
-    testRunnerVersion = "1.1.0-alpha3"
-    espressoVersion = "3.1.0-alpha3"
+    mockitoVersion = "2.21.0"
+    testRunnerVersion = "1.1.0-alpha4"
+    espressoVersion = "3.1.0-alpha4"
     moshiVersion = "1.6.0"
 
-    rxJavaVersion = "2.1.10"
-    rxKotlinVersion = "2.2.0"
-    rxAndroidVersion = "2.0.2"
+    rxJavaVersion = "2.2.2"
+    rxKotlinVersion = "2.3.0"
+    rxAndroidVersion = "2.1.0"
     rxBindingVersion = "2.1.1"
 }
 
